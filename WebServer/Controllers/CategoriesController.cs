@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataLayer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebServer.Controllers
@@ -10,10 +6,27 @@ namespace WebServer.Controllers
     [Route("api/categories")]
     public class CategoriesController : ControllerBase
     {
+        private IDataService _dataService = new DataService();
+
         [HttpGet]
-        public string Get()
+        public IActionResult Get()
         {
-            return "Hello from controller";
+            var categories = _dataService.GetCategories();
+            return Ok(categories);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetCategory(int id)
+        {
+            var category = _dataService.GetCategory(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(category);
+
         }
     }
 }
