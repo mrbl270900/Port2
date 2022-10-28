@@ -55,6 +55,19 @@ namespace WebServer.Controllers
             return CreatedAtRoute(null, CreateCategoryModel(category));
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            var deleted = _dataService.DeleteCategory(id);
+
+            if (!deleted)
+            {
+               return  NotFound();
+            }
+
+            return Ok();
+        }
+
 
         private CategoryModel CreateCategoryModel(Category category)
         {
