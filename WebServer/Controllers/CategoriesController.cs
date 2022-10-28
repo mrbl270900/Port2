@@ -5,6 +5,7 @@ using WebServer.Models;
 namespace WebServer.Controllers
 {
     [Route("api/categories")]
+    [ApiController]
     public class CategoriesController : ControllerBase
     {
         private IDataService _dataService;
@@ -39,6 +40,21 @@ namespace WebServer.Controllers
             return Ok(model);
 
         }
+
+        [HttpPost]
+        public IActionResult CreateCategory(CategoryCreateModel model)
+        {
+            var category = new Category
+            {
+                Name = model.Name,
+                Description = model.Description
+            };
+
+            _dataService.CreateCategory(category);
+
+            return CreatedAtRoute(null, CreateCategoryModel(category));
+        }
+
 
         private CategoryModel CreateCategoryModel(Category category)
         {
