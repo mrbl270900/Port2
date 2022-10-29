@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DataLayer.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -79,6 +80,14 @@ namespace DataLayer
         public Product? GetProduct(int id)
         {
             return _products.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IList<ProductSearchModel> GetProductByName(string search)
+        {
+            return _products
+                .Where(x => x.Name.ToLower().Contains(search.ToLower()))
+                .Select(x => new ProductSearchModel { ProductName = x.Name, CategoryName = x.Category.Name })
+                .ToList();
         }
     }
 }

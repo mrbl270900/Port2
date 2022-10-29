@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DataLayer.Models;
+using System.Collections.Generic;
 
 namespace DataLayer
 {
@@ -11,5 +12,7 @@ namespace DataLayer
         void CreateCategory(Category category);
         bool UpdateCategory(Category category);
         bool DeleteCategory(int id);
+
+        IList<ProductSearchModel> GetProductByName(string search);
     }
 }
