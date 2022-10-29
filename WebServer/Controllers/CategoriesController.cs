@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using AutoMapper;
+using DataLayer;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Models;
 
@@ -10,11 +11,13 @@ namespace WebServer.Controllers
     {
         private IDataService _dataService;
         private readonly LinkGenerator _generator;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(IDataService dataService, LinkGenerator generator)
+        public CategoriesController(IDataService dataService, LinkGenerator generator, IMapper mapper)
         {
             _dataService = dataService;
             _generator = generator;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -44,12 +47,8 @@ namespace WebServer.Controllers
         [HttpPost]
         public IActionResult CreateCategory(CategoryCreateModel model)
         {
-            var category = new Category
-            {
-                Name = model.Name,
-                Description = model.Description
-            };
-
+            var category = _mapper.Map<Category>(model);
+            
             _dataService.CreateCategory(category);
 
             return CreatedAtRoute(null, CreateCategoryModel(category));
@@ -71,12 +70,8 @@ namespace WebServer.Controllers
 
         private CategoryModel CreateCategoryModel(Category category)
         {
-            var model = new CategoryModel
-            {
-                Url = _generator.GetUriByName(HttpContext, nameof(GetCategory), new { category.Id }),
-                Name = category.Name,
-                Description = category.Description
-            };
+            var model = _mapper.Map<CategoryModel> (category);
+            model.Url = _generator.GetUriByName(HttpContext, nameof(GetCategory), new { category.Id });
             return model;
         }
     }
