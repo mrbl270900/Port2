@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DataLayer
 {
-    public class DataService : IDataService
+    public class DummyDataService : IDataService
     {
         private readonly List<Category> _categories = new List<Category>
         {
@@ -22,7 +22,7 @@ namespace DataLayer
         private readonly List<Product> _products = new List<Product>();
 
 
-        public DataService()
+        public DummyDataService()
         {
             _products.Add(new Product { Id = 1, Name = "Chai", Category = GetCategory(1) });
             _products.Add(new Product { Id = 2, Name = "Chang", Category = GetCategory(1) });
