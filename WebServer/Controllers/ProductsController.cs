@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataLayer;
+using DataLayer.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

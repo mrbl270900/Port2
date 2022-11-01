@@ -10,6 +10,9 @@ namespace WebServer.Models
     {
         public string? Url { get; set; }
         public string? Name { get; set; }
+        public double UnitPrice { get; set; }
+        public int UnitsInStock { get; set; }
+        public string? QuantityPerUnit { get; set; }
         public CategoryModel? Category { get; set; }
     }
 }

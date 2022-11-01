@@ -1,4 +1,5 @@
-﻿using DataLayer.Models;
+﻿using DataLayer.Domain;
+using DataLayer.Models;
 using System.Collections.Generic;
 
 namespace DataLayer
