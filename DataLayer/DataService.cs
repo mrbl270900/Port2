@@ -59,10 +59,21 @@ namespace DataLayer
                 .ToList();
         }
 
-        public IList<Product> GetProducts()
+        public IList<Product> GetProducts(int page, int pageSize)
         {
             using var db = new NorthwindContext();
-            return db.Products.Include(x => x.Category).ToList();
+            return db.Products
+                .Include(x => x.Category)
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .OrderBy(x => x.Id)
+                .ToList();
+        }
+
+        public int GetNumberOfProducts()
+        {
+            using var db = new NorthwindContext();
+            return db.Products.Count();
         }
 
         public bool UpdateCategory(Category category)

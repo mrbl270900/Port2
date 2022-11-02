@@ -19,6 +19,8 @@ namespace WebServer.Controllers
         private readonly LinkGenerator _generator;
         private readonly IMapper _mapper;
 
+        private const int MaxPageSize = 25;
+
         public ProductsController(IDataService dataService, LinkGenerator generator, IMapper mapper)
         {
             _dataService = dataService;
@@ -27,18 +29,44 @@ namespace WebServer.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProducts(string? search = null)
+        public IActionResult GetProducts(int page = 0, int pageSize = 10)
         {
-            if (string.IsNullOrEmpty(search))
-            {
-                var products =
-                    _dataService.GetProducts().Select(x => CreateProductListModel(x));
-                return Ok(products);
-            }
+            pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
 
-            var data = _dataService.GetProductByName(search);
-            return Ok(data);
+            //if (pageSize > MaxPageSize)
+            //{
+            //    pageSize = MaxPageSize;
+            //}
+
+            var products =
+                    _dataService.GetProducts(page, pageSize).Select(x => CreateProductListModel(x));
+
+            var result = new
+            {
+                prev = "",
+                next = "",
+                current = "",
+                total = _dataService.GetNumberOfProducts(),
+                pages = 0,
+                items = products
+            };
+            
+            return Ok(result);
         }
+
+        //[HttpGet]
+        //public IActionResult GetProducts(string? search = null)
+        //{
+        //    if (string.IsNullOrEmpty(search))
+        //    {
+        //        var products =
+        //            _dataService.GetProducts().Select(x => CreateProductListModel(x));
+        //        return Ok(products);
+        //    }
+
+        //    var data = _dataService.GetProductByName(search);
+        //    return Ok(data);
+        //}
 
 
         [HttpGet("{id}", Name = nameof(GetProduct))]

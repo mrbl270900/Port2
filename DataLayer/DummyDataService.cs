@@ -42,6 +42,11 @@ namespace DataLayer
             return _categories.FirstOrDefault(x => x.Id == id);
         }
 
+        public int GetNumberOfProducts()
+        {
+            return _products.Count;
+        }
+
         public void CreateCategory(Category category)
         {
             var maxId = _categories.Max(x => x.Id);
@@ -73,7 +78,7 @@ namespace DataLayer
         }
 
 
-        public IList<Product> GetProducts()
+        public IList<Product> GetProducts(int page, int pageSize)
         {
             return _products;
         }
