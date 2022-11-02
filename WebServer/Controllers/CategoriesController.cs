@@ -21,7 +21,7 @@ namespace WebServer.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetCategories))]
         public IActionResult GetCategories()
         {
             var categories = 
@@ -75,5 +75,14 @@ namespace WebServer.Controllers
             model.Url = _generator.GetUriByName(HttpContext, nameof(GetCategory), new { category.Id });
             return model;
         }
+
+        private string? CreateLink(int page, int pageSize)
+        {
+            return _generator.GetUriByName(
+                HttpContext,
+                nameof(GetCategories), new { page, pageSize });
+        }
+
+        
     }
 }

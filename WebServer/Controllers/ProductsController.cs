@@ -28,31 +28,17 @@ namespace WebServer.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetProducts))]
         public IActionResult GetProducts(int page = 0, int pageSize = 10)
         {
-            pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
-
-            //if (pageSize > MaxPageSize)
-            //{
-            //    pageSize = MaxPageSize;
-            //}
-
             var products =
                     _dataService.GetProducts(page, pageSize).Select(x => CreateProductListModel(x));
-
-            var result = new
-            {
-                prev = "",
-                next = "",
-                current = "",
-                total = _dataService.GetNumberOfProducts(),
-                pages = 0,
-                items = products
-            };
-            
-            return Ok(result);
+            var total = _dataService.GetNumberOfProducts();
+            return Ok(Paging(page, pageSize, total, products));
         }
+
+        
+
 
         //[HttpGet]
         //public IActionResult GetProducts(string? search = null)
@@ -98,6 +84,52 @@ namespace WebServer.Controllers
             model.Url = _generator.GetUriByName(HttpContext, nameof(GetProduct), new { product.Id });
             model.Category.Url = _generator.GetUriByName(HttpContext, nameof(CategoriesController.GetCategory), new { product.Category.Id});
             return model;
+        }
+
+        private string? CreateLink(int page, int pageSize)
+        {
+            return _generator.GetUriByName(
+                HttpContext,
+                nameof(GetProducts), new { page, pageSize });
+        }
+
+        private object Paging<T>(int page, int pageSize, int total, IEnumerable<T> items)
+        {
+            pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+            //if (pageSize > MaxPageSize)
+            //{
+            //    pageSize = MaxPageSize;
+            //}
+
+            var pages = (int)Math.Ceiling((double)total / (double)pageSize)
+                ;
+
+            var first = total > 0
+                ? CreateLink(0, pageSize)
+                : null;
+
+            var prev = page > 0
+                ? CreateLink(page - 1, pageSize)
+                : null;
+
+            var current = CreateLink(page, pageSize);
+
+            var next = page < pages - 1
+                ? CreateLink(page + 1, pageSize)
+                : null;
+
+            var result = new
+            {
+                first,
+                prev,
+                next,
+                current,
+                total,
+                pages,
+                items
+            };
+            return result;
         }
     }
 }
