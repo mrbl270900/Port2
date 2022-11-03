@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Domain
 {
-    public class Category
+    public class users
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? Description { get; set; }
+        public string userid { get; set; }
+
+        public string password { get; set; }
+
+        public bool admin { get; set; } = false;
+
     }
 }
