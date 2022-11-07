@@ -18,11 +18,6 @@ namespace DataLayer
             movie_titles movie = db.movie_titles.FirstOrDefault(x => x.Id == id);
         }
 
-        public user_ratingSignUp()
-        {
-
-        }
-
         public best_match(string input)
         {
             BestMatchOut test = new BestMatchOut();
@@ -30,7 +25,8 @@ namespace DataLayer
 
         public create_name_bookmark(string userid string nconst)
         {
-
+            db.Database.ExecuteSqlInterpolated($"select create_name_bookmark({userid},{nconst})");
+            db.SaveChanges();
         }
 
         public create_rating(string userid string tconst int rating)
