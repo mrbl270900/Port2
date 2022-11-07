@@ -7,6 +7,19 @@ namespace DataLayer
     {
         public DbSet<movie_titles> movie_titles { get; set; }
         public DbSet<person> persons { get; set; }
+        public DbSet<users> users { get; set; }
+        public DbSet<movie_akas> movie_akas { get; set; }
+        public DbSet<movie_episode> movie_episodes { get; set; }
+        public DbSet<movie_partof> movie_partof { get; set; }
+        public DbSet<movie_rating> movie_rating { get; set; }
+        public DbSet<name_search> name_search { get; set; }
+        public DbSet<OMDB_dataset> omdb_dataset { get; set; }
+        public DbSet<search_history> search_histories { get; set; }
+        public DbSet<title_search> title_searches { get; set; }
+        public DbSet<user_bookmark_name> user_bookmark_names { get; set; }
+        public DbSet<user_rating> user_rating { get; set; }
+        public DbSet<users_bookmark_title> users_bookmark_titles { get; set; }
+        public DbSet<wi> wis { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
