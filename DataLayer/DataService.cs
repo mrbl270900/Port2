@@ -25,7 +25,7 @@ namespace DataLayer
 
         public best_match(string input)
         {
-
+            BestMatchOut test = new BestMatchOut();
         }
 
         public create_name_bookmark(string userid string nconst)
