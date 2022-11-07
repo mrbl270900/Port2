@@ -15,7 +15,7 @@ namespace DataLayer
 
         public GetMovieTitle(string id)
         {
-            movie_titles movie = db.movie_titles.FirstOrDefault(x => x.Id == id);
+            movie_titles movie = db.movie_titles.FirstOrDefault(x => x.tcontst == id);
         }
 
         public List<BestMatchOut> best_match(string input)
@@ -24,31 +24,31 @@ namespace DataLayer
             return result.ToList;
         }
 
-        public create_name_bookmark(string userid string nconst)
+        public create_name_bookmark(string userid, string nconst)
         {
             db.Database.ExecuteSqlInterpolated($"select create_name_bookmark({userid},{nconst})");
             db.SaveChanges();
         }
 
-        public create_rating(string userid string tconst int rating)
+        public create_rating(string userid, string tconst, int rating)
         {
             db.Database.ExecuteSqlInterpolated($"select create_rating({userid},{tconst},{rating})");
             db.SaveChanges();
         }
 
-        public create_title_bookmark(string userid string tconst)
+        public create_title_bookmark(string userid, string tconst)
         {
             db.Database.ExecuteSqlInterpolated($"select create_name_bookmark({userid},{tconst})");
             db.SaveChanges();
         }
 
-        public delete_name_bookmark(string userid string nconst)
+        public delete_name_bookmark(string userid, string nconst)
         {
             db.Database.ExecuteSqlInterpolated($"select delete_name_bookmark({userid},{nconst})");
             db.SaveChanges();
         }
 
-        public delete_rating(string userid string tconst int rating)
+        public delete_rating(string userid, string tconst, int rating)
         {
             db.Database.ExecuteSqlInterpolated($"select delete_rating({userid},{tconst},{rating})");
             db.SaveChanges();
@@ -72,7 +72,7 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public delete_title_bookmark(string userid string tconst)
+        public delete_title_bookmark(string userid, string tconst)
         {
             db.Database.ExecuteSqlInterpolated($"select delete_title_bookmark({userid},{tconst})");
             db.SaveChanges();
@@ -96,11 +96,11 @@ namespace DataLayer
 
         public find_coplayers(string nconst)
         {//todo lav en model med find coplayers
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({input})");
+            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({nconst})");
             return result.ToList;
         }
 
-        public login_user(string userid string password)
+        public login_user(string userid, string password)
         {
             db.Database.ExecuteSqlInterpolated($"select login_user({userid},{password})");
             db.SaveChanges();
@@ -108,7 +108,7 @@ namespace DataLayer
 
         public movie_actors_by_rating(string tconst)
         {//todo lav en model med movieactors by rating
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({input})");
+            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({tconst})");
             return result.ToList;
         }
 
@@ -124,13 +124,13 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public search_name(string userid string nconst)
+        public search_name(string userid, string nconst)
         {
             db.Database.ExecuteSqlInterpolated($"select search_name({userid},{nconst})");
             db.SaveChanges();
         }
 
-        public search_title(string userid string tconst)
+        public search_title(string userid, string tconst)
         {
             db.Database.ExecuteSqlInterpolated($"select search_title({userid},{tconst})");
             db.SaveChanges();
@@ -144,17 +144,17 @@ namespace DataLayer
 
         public similar_movies(string tconst)
         {//todo lav relsultat similar movies
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({input})");
+            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({tconst})");
             return result.ToList;
         }
 
-        public user_signup(string userid string password)
+        public user_signup(string userid, string password)
         {
             db.Database.ExecuteSqlInterpolated($"select user_signup({userid},{password})");
             db.SaveChanges();
         }
 
-        public user_signup(string userid string password bool admin)
+        public user_signup(string userid, string password, bool admin)
         {
             db.Database.ExecuteSqlInterpolated($"select user_signup({userid},{password}, {admin})");
             db.SaveChanges();
