@@ -18,9 +18,10 @@ namespace DataLayer
             movie_titles movie = db.movie_titles.FirstOrDefault(x => x.Id == id);
         }
 
-        public best_match(string input)
+        public List<BestMatchOut> best_match(string input)
         {
-            BestMatchOut test = new BestMatchOut();
+            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({input})");
+            return result.ToList;
         }
 
         public create_name_bookmark(string userid string nconst)
@@ -31,12 +32,14 @@ namespace DataLayer
 
         public create_rating(string userid string tconst int rating)
         {
-
+            db.Database.ExecuteSqlInterpolated($"select create_rating({userid},{tconst},{rating})");
+            db.SaveChanges();
         }
 
         public create_title_bookmark(string userid string tconst)
         {
-
+            db.Database.ExecuteSqlInterpolated($"select create_name_bookmark({userid},{tconst})");
+            db.SaveChanges();
         }
 
         public delete_name_bookmark(string userid string nconst)

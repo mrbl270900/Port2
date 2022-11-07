@@ -20,6 +20,7 @@ namespace DataLayer
         public DbSet<user_rating> user_rating { get; set; }
         public DbSet<users_bookmark_title> users_bookmark_titles { get; set; }
         public DbSet<wi> wis { get; set; }
+        public DbSet<BestMatchOut> bestmatchouts { get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
