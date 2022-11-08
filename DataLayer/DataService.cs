@@ -18,6 +18,12 @@ namespace DataLayer
             movie_titles movie = db.movie_titles.FirstOrDefault(x => x.tcontst == id);
         }
 
+
+        //todo mangler generele funktioner der kigge på vores tabeler
+
+
+
+
         public List<BestMatchOut> best_match(string input)
         {
             var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({input})");
