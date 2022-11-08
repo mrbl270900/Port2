@@ -21,6 +21,11 @@ namespace DataLayer
         public DbSet<users_bookmark_title> users_bookmark_titles { get; set; }
         public DbSet<wi> wis { get; set; }
         public DbSet<Models.BestMatchOut> bestmatchouts { get; set;}
+        public DbSet<Models.MovieActorOut> movieactorout { get; set; }
+        public DbSet<Models.WordOut> wordout { get; set; }
+        public DbSet<Models.LoginOut> loginout { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

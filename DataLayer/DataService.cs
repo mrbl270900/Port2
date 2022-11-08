@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace DataLayer
         }
 
 
-        //todo mangler generele funktioner der kigge på vores tabeler
+        //todo mangler generele funktioner der kigge i vores tabeler
 
 
 
@@ -89,7 +90,7 @@ namespace DataLayer
             db.Database.ExecuteSqlInterpolated($"select delete_user({userid})");
             db.SaveChanges();
         }
-
+        //todo tjek om dette skal med i pogrammet
         /*public exact_match(string input)
         {
 
@@ -100,21 +101,21 @@ namespace DataLayer
 
         }*/
 
-        public List<BestMatchOut> find_coplayers(string nconst)
-        {//todo lav en model med find coplayers
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({nconst})");
+        public List<MovieActorOut> find_coplayers(string nconst)
+        {
+            var result = db.movieactorout.FromSqlInterpolated($"select * find_coplayers({nconst})");
             return result.ToList();
         }
 
-        public void login_user(string userid, string password)
-        {//todo tjek om der er output her
-            db.Database.ExecuteSqlInterpolated($"select login_user({userid},{password})");
-            db.SaveChanges();
+        public List<LoginOut> login_user(string userid, string password)
+        {
+            var result = db.loginout.FromSqlInterpolated($"select * login_user({userid},{password})");
+            return result.ToList();
         }
 
-        public List<BestMatchOut> movie_actors_by_rating(string tconst)
-        {//todo lav en model med movieactors by rating
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({tconst})");
+        public List<MovieActorOut> movie_actors_by_rating(string tconst)
+        {
+            var result = db.movieactorout.FromSqlInterpolated($"select * movie_actors_by_rating({tconst})");
             return result.ToList();
         }
 
@@ -148,9 +149,9 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public List<BestMatchOut> similar_movies(string tconst)
-        {//todo lav relsultat similar movies
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({tconst})");
+        public List<MovieActorOut> similar_movies(string tconst)
+        {
+            var result = db.movieactorout.FromSqlInterpolated($"select * similar_movies({tconst})");
             return result.ToList();
         }
 
@@ -166,9 +167,9 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public List<BestMatchOut> word_word_match(string input)
-        {//todo lav word_word_mathc
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({input})");
+        public List<WordOut> word_word_match(string input)
+        {
+            var result = db.wordout.FromSqlInterpolated($"select * word_word_match({input})");
             return result.ToList();
         }
     }
