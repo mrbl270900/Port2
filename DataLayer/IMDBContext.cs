@@ -1,4 +1,5 @@
 ﻿using DataLayer.Domain;
+using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer
@@ -20,10 +21,10 @@ namespace DataLayer
         public DbSet<user_rating> user_rating { get; set; }
         public DbSet<users_bookmark_title> users_bookmark_titles { get; set; }
         public DbSet<wi> wis { get; set; }
-        public DbSet<Models.BestMatchOut> bestmatchouts { get; set;}
-        public DbSet<Models.MovieActorOut> movieactorout { get; set; }
-        public DbSet<Models.WordOut> wordout { get; set; }
-        public DbSet<Models.LoginOut> loginout { get; set; }
+        public DbSet<BestMatchOut> bestmatchouts { get; set;}
+        public DbSet<MovieActorOut> movieactorout { get; set; }
+        public DbSet<WordOut> wordout { get; set; }
+        public DbSet<LoginOut> loginout { get; set; }
 
 
 
