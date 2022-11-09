@@ -8,7 +8,7 @@ namespace DataLayer.Domain
 {
     public class movie_titles
     {
-        public string tcontst { get; set; }
+        public string tconst { get; set; }
 
         public string title { get; set; }
 
@@ -18,9 +18,9 @@ namespace DataLayer.Domain
 
         public bool? isadult { get; set; }
 
-        public int? startyear { get; set; }
+        public string? startyear { get; set; }
 
-        public int? endyear { get; set; }
+        public string? endyear { get; set; }
 
         public int? runtimeminutes { get; set; }
 

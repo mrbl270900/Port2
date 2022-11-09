@@ -10,28 +10,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class DataService : IDataService
+    public class UserDataService : IUserDataService
     {
         public IMDBContext db = new IMDBContext();
-
-        public movie_titles GetMovieTitle(string id)
-        {
-            movie_titles movie = db.movie_titles.FirstOrDefault(x => x.tcontst == id);
-            return movie;
-        }
-
-
-        //todo mangler generele funktioner der kigge i vores tabeler
-
-
-
-
-        public List<BestMatchOut> best_match(string input)
-        {
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({input})");
-            return result.ToList();
-        }
-
         public void create_name_bookmark(string userid, string nconst)
         {
             db.Database.ExecuteSqlInterpolated($"select create_name_bookmark({userid},{nconst})");
@@ -61,7 +42,7 @@ namespace DataLayer
             db.Database.ExecuteSqlInterpolated($"select delete_rating({userid},{tconst},{rating})");
             db.SaveChanges();
         }
-        
+
         public void delete_search(string userid)
         {
             db.Database.ExecuteSqlInterpolated($"select delete_search({userid})");
@@ -91,45 +72,11 @@ namespace DataLayer
             db.Database.ExecuteSqlInterpolated($"select delete_user({userid})");
             db.SaveChanges();
         }
-        //todo tjek om dette skal med i pogrammet
-        /*public exact_match(string input)
-        {
-
-        }
-
-        public exact_match(string userid string input)
-        {
-
-        }*/
-
-        public List<MovieActorOut> find_coplayers(string nconst)
-        {
-            var result = db.movieactorout.FromSqlInterpolated($"select * find_coplayers({nconst})");
-            return result.ToList();
-        }
 
         public List<LoginOut> login_user(string userid, string password)
         {
             var result = db.loginout.FromSqlInterpolated($"select * login_user({userid},{password})");
             return result.ToList();
-        }
-
-        public List<MovieActorOut> movie_actors_by_rating(string tconst)
-        {
-            var result = db.movieactorout.FromSqlInterpolated($"select * movie_actors_by_rating({tconst})");
-            return result.ToList();
-        }
-
-        public void movie_visited(string tconst)
-        {
-            db.Database.ExecuteSqlInterpolated($"select movie_visited({tconst})");
-            db.SaveChanges();
-        }
-
-        public void name_rating_setter()
-        {
-            db.Database.ExecuteSqlInterpolated($"select movie_visited()");
-            db.SaveChanges();
         }
 
         public void search_name(string userid, string nconst)
@@ -150,12 +97,6 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public List<MovieActorOut> similar_movies(string tconst)
-        {
-            var result = db.movieactorout.FromSqlInterpolated($"select * similar_movies({tconst})");
-            return result.ToList();
-        }
-
         public void user_signup(string userid, string password)
         {
             db.Database.ExecuteSqlInterpolated($"select user_signup({userid},{password})");
@@ -168,10 +109,5 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public List<WordOut> word_word_match(string input)
-        {
-            var result = db.wordout.FromSqlInterpolated($"select * word_word_match({input})");
-            return result.ToList();
-        }
     }
-    }
+}
