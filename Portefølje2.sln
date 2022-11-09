@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServer", "WebServer\WebServer.csproj", "{E62B170A-C367-4C22-8FEB-45B542A604B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjekt", "TestProjekt\TestProjekt.csproj", "{BCE38C32-6E4D-462E-A892-80C27BB5B5D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProjekt", "TestProjekt\TestProjekt.csproj", "{BCE38C32-6E4D-462E-A892-80C27BB5B5D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
