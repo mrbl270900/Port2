@@ -22,10 +22,13 @@ namespace TestProjekt
         public void Testbest_match()
         {
             var service = new MovieDataService();
-            var result = service.best_match("mads");
+            List<string> input = new List<string>();
+            input.Add("mads");
+            var result = service.best_match(input);
             Assert.Equal(42, result.Count);
             Assert.Equal("tt19877276", result.First().tconst);
-            //result = service.best_match("world, mads");
+            input.Add("world");
+            result = service.best_match(input);
             Assert.Equal(5906, result.Count);
             Assert.Equal("tt13243898", result.First().tconst);
         }

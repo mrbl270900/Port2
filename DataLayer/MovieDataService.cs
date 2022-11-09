@@ -26,9 +26,22 @@ namespace DataLayer
 
 
 
-        public List<BestMatchOut> best_match(string input)
+        public List<BestMatchOut> best_match(List<string> input)
         {
-            var result = db.bestmatchouts.FromSqlInterpolated($"select best_match({input})");
+            string ConcatInput = "select best_match('";
+            foreach (string element in input)
+            {
+                if (input.Last().Equals(element))
+                {
+                    ConcatInput = ConcatInput + element;
+                    ConcatInput = ConcatInput + "')";
+                    break;
+                }
+                ConcatInput = ConcatInput + element;
+                ConcatInput = ConcatInput + "', '";
+            }
+
+            var result = db.bestmatchouts.FromSqlInterpolated($"select best_match({ConcatInput})");
             return result.ToList();
         }
 
