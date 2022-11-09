@@ -7,7 +7,7 @@ namespace DataLayer
 {
     public interface IDataService
     {
-        movie_titles GetMovieTitle(string id);
+        movie_titles? GetMovieTitle(string id);
         List<BestMatchOut> best_match(string input);
         void create_name_bookmark(string userid, string nconst);
         void create_rating(string userid, string tconst, int rating);

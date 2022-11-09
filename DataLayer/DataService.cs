@@ -14,7 +14,7 @@ namespace DataLayer
     {
         public IMDBContext db = new IMDBContext();
 
-        public movie_titles GetMovieTitle(string id)
+        public movie_titles? GetMovieTitle(string id)
         {
             movie_titles? movie = db.movie_titles.FirstOrDefault(x => x.tcontst == id);
             return movie;
