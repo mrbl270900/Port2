@@ -10,7 +10,7 @@ namespace TestProjekt
         public void TestContext()
         {
             var service = new DataService();
-            movie_titles movie = service.GetMovieTitle("tt7856872");
+            movie_titles? movie = service.GetMovieTitle("tt7856872");
             Assert.Equal("Apocalypse", movie.primarytitle);
             Assert.Equal("Drama", movie.genres);
         }

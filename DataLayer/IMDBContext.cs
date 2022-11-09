@@ -37,8 +37,8 @@ namespace DataLayer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<movie_titles>().ToTable("movie_title");
-            modelBuilder.Entity<movie_titles>().HasKey(x => new { x.tcontst });
-            modelBuilder.Entity<movie_titles>().Property(x => x.tcontst).HasColumnName("tcontst");
+            modelBuilder.Entity<movie_titles>().HasKey(x => new { x.tconst });
+            modelBuilder.Entity<movie_titles>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<movie_titles>().Property(x => x.title).HasColumnName("title");
             modelBuilder.Entity<movie_titles>().Property(x => x.primarytitle).HasColumnName("primarytitle");
             modelBuilder.Entity<movie_titles>().Property(x => x.originaltitle).HasColumnName("originaltitle");
