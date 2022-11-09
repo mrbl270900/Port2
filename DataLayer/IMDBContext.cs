@@ -63,7 +63,7 @@ namespace DataLayer
             modelBuilder.Entity<users>().Property(x => x.password).HasColumnName("password");
             modelBuilder.Entity<users>().Property(x => x.admin).HasColumnName("admin");
 
-            modelBuilder.Entity<movie_akas>().ToTable("users");
+            modelBuilder.Entity<movie_akas>().ToTable("movie_akas");
             modelBuilder.Entity<movie_akas>().HasKey(x => new { x.titleid, x.ordering });
             modelBuilder.Entity<movie_akas>().Property(x => x.titleid).HasColumnName("titleid");
             modelBuilder.Entity<movie_akas>().Property(x => x.ordering).HasColumnName("ordering");
@@ -81,7 +81,7 @@ namespace DataLayer
             modelBuilder.Entity<movie_episode>().Property(x => x.seseasonnumber).HasColumnName("seseasonnumber");
             modelBuilder.Entity<movie_episode>().Property(x => x.episodenumber).HasColumnName("episodenumber");
 
-            modelBuilder.Entity<movie_partof>().ToTable("movie_episode");
+            modelBuilder.Entity<movie_partof>().ToTable("movie_partof");
             modelBuilder.Entity<movie_partof>().HasKey(x => new { x.tconst, x.ordering, x.nconst });
             modelBuilder.Entity<movie_partof>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<movie_partof>().Property(x => x.ordering).HasColumnName("ordering");
@@ -142,6 +142,22 @@ namespace DataLayer
             modelBuilder.Entity<wi>().Property(x => x.word).HasColumnName("word");
             modelBuilder.Entity<wi>().Property(x => x.field).HasColumnName("field");
             modelBuilder.Entity<wi>().Property(x => x.lexeme).HasColumnName("lexeme");
+
+            modelBuilder.Entity<BestMatchOut>().HasNoKey();
+            modelBuilder.Entity<BestMatchOut>().Property(x => x.tconst).HasColumnName("tconst");
+            modelBuilder.Entity<BestMatchOut>().Property(x => x.weight).HasColumnName("weight");
+
+            modelBuilder.Entity<LoginOut>().HasNoKey();
+            modelBuilder.Entity<LoginOut>().Property(x => x.PassOk).HasColumnName("PassOk");
+
+            modelBuilder.Entity<MovieActorOut>().HasNoKey();
+            modelBuilder.Entity<MovieActorOut>().Property(x => x.nconst).HasColumnName("nconst");
+            modelBuilder.Entity<MovieActorOut>().Property(x => x.name).HasColumnName("name");
+            modelBuilder.Entity<MovieActorOut>().Property(x => x.tal).HasColumnName("tal");
+
+            modelBuilder.Entity<WordOut>().HasNoKey();
+            modelBuilder.Entity<WordOut>().Property(x => x.weight).HasColumnName("weight");
+            modelBuilder.Entity<WordOut>().Property(x => x.word).HasColumnName("word");
         }
     }
 }

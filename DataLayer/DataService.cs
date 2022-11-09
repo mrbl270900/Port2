@@ -16,7 +16,7 @@ namespace DataLayer
 
         public movie_titles GetMovieTitle(string id)
         {
-            movie_titles movie = db.movie_titles.FirstOrDefault(x => x.tcontst == id);
+            movie_titles? movie = db.movie_titles.FirstOrDefault(x => x.tcontst == id);
             return movie;
         }
 
