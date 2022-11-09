@@ -28,7 +28,7 @@ namespace DataLayer
 
         public List<BestMatchOut> best_match(string input)
         {
-            var result = db.bestmatchouts.FromSqlInterpolated($"select * best_match({input})");
+            var result = db.bestmatchouts.FromSqlInterpolated($"select best_match({input})");
             return result.ToList();
         }
 
