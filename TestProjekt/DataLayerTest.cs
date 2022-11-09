@@ -4,7 +4,7 @@ using DataLayer.Models;
 
 namespace TestProjekt
 {
-    public class DataLayer
+    public class DataLayerTest
     {
         [Fact]
         public void TestContext()
