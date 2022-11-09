@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class DataService : IDataService
+    public class MovieDataService : IMovieDataService
     {
         public IMDBContext db = new IMDBContext();
 

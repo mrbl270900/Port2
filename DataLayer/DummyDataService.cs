@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DataLayer
 {
-    public class DummyDataService : IDataService
+    public class DummyDataService : IMovieDataService
     {
         public List<BestMatchOut> best_match(string input)
         {

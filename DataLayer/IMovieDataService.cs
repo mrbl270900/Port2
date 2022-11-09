@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataLayer
 {
-    public interface IDataService
+    public interface IMovieDataService
     {
         movie_titles? GetMovieTitle(string id);
         List<BestMatchOut> best_match(string input);
