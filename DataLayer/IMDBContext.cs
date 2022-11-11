@@ -73,7 +73,7 @@ namespace DataLayer
             modelBuilder.Entity<movie_akas>().Property(x => x.types).HasColumnName("types");
             modelBuilder.Entity<movie_akas>().Property(x => x.attributes).HasColumnName("attributes");
             modelBuilder.Entity<movie_akas>().Property(x => x.isoriginaltitle).HasColumnName("isoriginaltitle");
-
+            
             modelBuilder.Entity<movie_episode>().ToTable("movie_episode");
             modelBuilder.Entity<movie_episode>().HasKey(x => new { x.tconst});
             modelBuilder.Entity<movie_episode>().Property(x => x.tconst).HasColumnName("tconst");
