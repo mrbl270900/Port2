@@ -41,7 +41,7 @@ namespace DataLayer
                 ConcatInput = ConcatInput + "', '";
             }
 
-            var result = db.bestmatchouts.FromSqlInterpolated($"select best_match({ConcatInput})");
+            var result = db.bestmatchouts.FromSqlInterpolated($"{ConcatInput}");
             return result.ToList();
         }
 
