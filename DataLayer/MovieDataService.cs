@@ -2,6 +2,7 @@
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,20 +29,20 @@ namespace DataLayer
 
         public List<BestMatchOut> best_match(List<string> input)
         {
-            string ConcatInput = "select best_match('";
+            string ConcatInput = "'";
             foreach (string element in input)
             {
                 if (input.Last().Equals(element))
                 {
                     ConcatInput = ConcatInput + element;
-                    ConcatInput = ConcatInput + "')";
+                    ConcatInput = ConcatInput + "'";
                     break;
                 }
                 ConcatInput = ConcatInput + element;
                 ConcatInput = ConcatInput + "', '";
             }
-
-            var result = db.bestmatchouts.FromSqlInterpolated($"{ConcatInput}");
+            
+            var result = db.bestmatchouts.FromSqlRaw($"SELECT * from best_match({ConcatInput})");
             return result.ToList();
         }
 
@@ -87,9 +88,22 @@ namespace DataLayer
             return result.ToList();
         }
 
-        public List<WordOut> word_word_match(string input)
+        public List<WordOut> word_word_match(List<string> input)
         {
-            var result = db.wordout.FromSqlInterpolated($"select * word_word_match({input})");
+            string ConcatInput = "'";
+            foreach (string element in input)
+            {
+                if (input.Last().Equals(element))
+                {
+                    ConcatInput = ConcatInput + element;
+                    ConcatInput = ConcatInput + "'";
+                    break;
+                }
+                ConcatInput = ConcatInput + element;
+                ConcatInput = ConcatInput + "', '";
+            }
+
+            var result = db.wordout.FromSqlRaw($"SELECT * from word_word_match({ConcatInput})");
             return result.ToList();
         }
     }

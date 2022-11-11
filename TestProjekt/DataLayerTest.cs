@@ -33,6 +33,19 @@ namespace TestProjekt
             Assert.Equal("tt13243898", result.First().tconst);
         }
 
-        //todo test funktioner og hvad de retunere
+        [Fact]
+        public void Testword_word_match()
+        {
+            var service = new MovieDataService();
+            List<string> input = new List<string>();
+            input.Add("mads");
+            var result = service.word_word_match(input);
+            Assert.Equal(1623, result.Count);
+            Assert.Equal(49, result.First().weight);
+            input.Add("world");
+            result = service.word_word_match(input);
+            Assert.Equal(65016, result.Count);
+            Assert.Equal(6030, result.First().weight);
+        }
     }
 }
