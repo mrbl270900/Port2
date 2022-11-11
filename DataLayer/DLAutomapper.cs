@@ -3,7 +3,7 @@ using DataLayer.Domain;
 
 namespace WebServer.Models
 {
-    public class autoMapper
+    public class DLautoMapper
     {
         static void Main(string[] args)
 
@@ -38,4 +38,3 @@ namespace WebServer.Models
         }
     }
 };
-
