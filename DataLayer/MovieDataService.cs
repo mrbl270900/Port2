@@ -29,20 +29,20 @@ namespace DataLayer
 
         public List<BestMatchOut> best_match(List<string> input)
         {
-            string ConcatInput = "'";
+            string ConcatInput = "SELECT * from best_match('";
             foreach (string element in input)
             {
                 if (input.Last().Equals(element))
                 {
                     ConcatInput = ConcatInput + element;
-                    ConcatInput = ConcatInput + "'";
+                    ConcatInput = ConcatInput + "')";
                     break;
                 }
                 ConcatInput = ConcatInput + element;
                 ConcatInput = ConcatInput + "', '";
             }
             
-            var result = db.bestmatchouts.FromSqlRaw($"SELECT * from best_match({ConcatInput})");
+            var result = db.bestmatchouts.FromSqlRaw(ConcatInput);
             return result.ToList();
         }
 
@@ -90,20 +90,20 @@ namespace DataLayer
 
         public List<WordOut> word_word_match(List<string> input)
         {
-            string ConcatInput = "'";
+            string ConcatInput = "SELECT * from word_word_match('";
             foreach (string element in input)
             {
                 if (input.Last().Equals(element))
                 {
                     ConcatInput = ConcatInput + element;
-                    ConcatInput = ConcatInput + "'";
+                    ConcatInput = ConcatInput + "')";
                     break;
                 }
                 ConcatInput = ConcatInput + element;
                 ConcatInput = ConcatInput + "', '";
             }
 
-            var result = db.wordout.FromSqlRaw($"SELECT * from word_word_match({ConcatInput})");
+            var result = db.wordout.FromSqlRaw(ConcatInput);
             return result.ToList();
         }
     }
