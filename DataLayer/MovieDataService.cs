@@ -21,6 +21,39 @@ namespace DataLayer
             return movie;
         }
 
+        public movie_titles? SetMovie(movie_titles input)
+        {
+            db.movie_titles.Add(input);
+            db.SaveChanges();
+            return input;
+        }
+        public movie_titles? DeleteMovie(movie_titles input)
+        {
+            db.movie_titles.Remove(input);
+            db.SaveChanges();
+            return input;
+        }
+
+        public person? GetPerson(string id)
+        {
+            person? person = db.persons.Find(id);
+            return person;
+        }
+
+        public person? SetPerson(person input)
+        {
+            db.persons.Add(input);
+            db.SaveChanges();
+            return input;
+        }
+
+        public person? DeletePerson(person input)
+        {
+            db.persons.Remove(input);
+            db.SaveChanges();
+            return input;
+        }
+
 
         //todo mangler generele funktioner der kigge i vores tabeler
 

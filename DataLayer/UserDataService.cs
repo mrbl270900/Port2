@@ -13,6 +13,12 @@ namespace DataLayer
     public class UserDataService : IUserDataService
     {
         public IMDBContext db = new IMDBContext();
+
+        public users? GetUser(string id)
+        {
+            users? user = db.users.Find(id);
+            return user;
+        }
         public void create_name_bookmark(string userid, string nconst)
         {
             db.Database.ExecuteSqlInterpolated($"select create_name_bookmark({userid},{nconst})");
