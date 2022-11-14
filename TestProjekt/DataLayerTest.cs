@@ -17,6 +17,14 @@ namespace TestProjekt
             Assert.Equal("Apocalypse", movie.primarytitle);
             Assert.Equal("Drama", movie.genres);
         }
+        [Fact]
+        public void TestMovie_title()
+        {
+            movie_titles movie = new movie_titles();
+            Assert.Null(movie.tconst);
+            Assert.Null(movie.primarytitle);
+            Assert.Null(movie.title);
+        }
 
         [Fact]
         public void Testbest_match()
