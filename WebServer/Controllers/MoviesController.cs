@@ -25,15 +25,10 @@ namespace WebServiceSimple.Controllers
         [Authorize] //this shows where I have to get Authorization
         public IActionResult GetMovieTitle(string id)
         {
-            try
-            {
-                var movies = _moviedataService.GetMovieTitle();
-                return Ok();
-            }
-            catch
-            {
-                return Unauthorized();
-            }
+            
+                var movies = _moviedataService.GetMovieTitle(id);
+                return Ok(movies);
+           
         }
 
     }
