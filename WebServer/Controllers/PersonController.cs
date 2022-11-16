@@ -30,7 +30,7 @@ using WebServer.Models;
         public IActionResult GetPerson()
         {
         var Person =
-            _dataService.GetPerson().Select(x => CreatePersonModel(x));
+            _MovieDataService.GetPerson().Select(x => CreatePersonModel(x));
         return Ok(Person);
         }
 
