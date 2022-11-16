@@ -8,6 +8,7 @@ namespace WebServer.Controllers
 {
     [Route("api/categories")]
     [ApiController]
+    [Authorize] //What needs authorization??
     public class CategoriesController : ControllerBase
     {
         private IDataService _dataService;
