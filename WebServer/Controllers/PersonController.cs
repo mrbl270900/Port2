@@ -10,15 +10,29 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using WebServer.Models;
 
-namespace Webserver.Controllers;
-
+{
+    [Route("api/categories")]
+    [ApiController]
+    public class CategoriesController : ControllerBase
     {
-        [Route("api/persons")]
-        [ApiController]
-        public class PersonControllers
+        private IMovieDataService _MovieDataService;
+        private readonly LinkGenerator _generator;
+        private readonly IMapper _mapper;
 
-        { 
-            
+        public CategoriesController(IDataService dataService, LinkGenerator generator, IMapper mapper)
+        {
+        _dataService = dataService;
+        _generator = generator;
+        _mapper = mapper;
         }
 
-    }
+        [HttpGet(Name = nameof(GetPersons))]
+        public IActionResult GetPerson()
+        {
+        var Person =
+            _dataService.GetPerson().Select(x => CreatePersonModel(x));
+        return Ok(Person);
+        }
+
+}
+}
