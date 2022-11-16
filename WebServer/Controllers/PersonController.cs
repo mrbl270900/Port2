@@ -16,13 +16,13 @@ namespace WebServer.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private IMovieDataService _MovieDataService;
+        private IMovieDataService _moviedataservice;
         private readonly LinkGenerator _generator;
         private readonly IMapper _mapper;
 
-        public CategoriesController(IDataService dataService, LinkGenerator generator, IMapper mapper)
+        public CategoriesController(IMovieDataService dataService, LinkGenerator generator, IMapper mapper)
         {
-        _dataService = dataService;
+        _moviedataservice = dataService;
         _generator = generator;
         _mapper = mapper;
         }
@@ -37,14 +37,14 @@ namespace WebServer.Controllers
             {
 
                 var person =
-                _MovieDataService.GetPerson(page, pageSize).Select(x => CreatePersonModel(x));
+                _moviedataservice.GetPerson(page, pageSize).Select(x => CreatePersonModel(x));
 
                 return Ok(Paging(page, pageSize));
             }
             else
 
             {
-                var data = _MovieDataService.GetPerson(search)
+                var data = _moviedataservice.GetPerson(search);
                 return Ok(data);
             }
         }
