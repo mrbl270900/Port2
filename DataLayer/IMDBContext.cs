@@ -11,6 +11,7 @@ namespace DataLayer
         public DbSet<user> users { get; set; }
         public DbSet<movie_akas> movie_akas { get; set; }
         public DbSet<movie_episode> movie_episodes { get; set; }
+        public DbSet<movie_clicks> movie_clicks { get; set; }
         public DbSet<movie_partof> movie_partof { get; set; }
         public DbSet<movie_rating> movie_rating { get; set; }
         public DbSet<name_search> name_search { get; set; }
@@ -47,6 +48,7 @@ namespace DataLayer
             modelBuilder.Entity<movie_title>().Property(x => x.endyear).HasColumnName("endyear");
             modelBuilder.Entity<movie_title>().Property(x => x.runtimeminutes).HasColumnName("runtimeminutes");
             modelBuilder.Entity<movie_title>().Property(x => x.genres).HasColumnName("genres");
+            modelBuilder.Entity<movie_title>().HasOne(x => x.movie_Episode).WithOne(m => m.titles).HasForeignKey<movie_episode>(x => x.tconst);
 
             modelBuilder.Entity<person>().ToTable("person");
             modelBuilder.Entity<person>().HasKey(x => new { x.nconst });
@@ -80,6 +82,7 @@ namespace DataLayer
             modelBuilder.Entity<movie_episode>().Property(x => x.parenttconst).HasColumnName("parenttconst");
             modelBuilder.Entity<movie_episode>().Property(x => x.seseasonnumber).HasColumnName("seseasonnumber");
             modelBuilder.Entity<movie_episode>().Property(x => x.episodenumber).HasColumnName("episodenumber");
+            modelBuilder.Entity<movie_episode>().HasOne(x => x.parenttitles).WithMany(m => m.movie_parents).HasForeignKey(x => x.parenttconst);
 
             modelBuilder.Entity<movie_partof>().ToTable("movie_partof");
             modelBuilder.Entity<movie_partof>().HasKey(x => new { x.tconst, x.ordering, x.nconst });
@@ -95,6 +98,11 @@ namespace DataLayer
             modelBuilder.Entity<movie_rating>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<movie_rating>().Property(x => x.averagerating).HasColumnName("averagerating");
             modelBuilder.Entity<movie_rating>().Property(x => x.numvotes).HasColumnName("numvotes");
+
+            modelBuilder.Entity<movie_clicks>().ToTable("movie_clicks");
+            modelBuilder.Entity<movie_clicks>().HasKey(x => new { x.tconst });
+            modelBuilder.Entity<movie_clicks>().Property(x => x.tconst).HasColumnName("tconst");
+            modelBuilder.Entity<movie_clicks>().Property(x => x.amount).HasColumnName("amount");
 
             modelBuilder.Entity<name_search>().ToTable("name_search");
             modelBuilder.Entity<name_search>().HasKey(x => new { x.userid, x.nconst });

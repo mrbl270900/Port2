@@ -15,10 +15,10 @@ namespace TestProjekt
             public void AutoMapperTest1()
             {
             var service = new MovieDataService();
-            movie_title movie = service.db.movie_titles.Find("tt7856872");
-            movie_akas akas = service.db.movie_akas.Find(movie.tconst);
-            Assert.Equal(movie.title, akas.titleid);
-            Assert.Equal("Drama", movie.genres);
+            movie_title? movie = service.db.movie_titles.Find("tt7856872");
+            List<movie_akas> akas = movie?.movie_Akas;
+            Assert.NotNull(akas);
+            Assert.Equal("Drama", movie?.genres);
         }
     }
 }

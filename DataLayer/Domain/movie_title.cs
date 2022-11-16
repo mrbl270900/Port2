@@ -30,7 +30,9 @@ namespace DataLayer.Domain
 
         public List<movie_clicks> movie_Clicks { get; set; }
 
-        public List<movie_episode> movie_Episodes { get; set; }
+        public movie_episode movie_Episode { get; set; }
+
+        public List<movie_episode> movie_parents { get; set; }
 
         public List<movie_partof> movie_Partofs { get; set; }
 

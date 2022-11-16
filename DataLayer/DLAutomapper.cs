@@ -1,4 +1,4 @@
-﻿x   using AutoMapper;
+﻿using AutoMapper;
 using DataLayer.Domain;
 
 namespace WebServer.Models
