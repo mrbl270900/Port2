@@ -50,8 +50,15 @@ namespace WebServer.Controllers
                 return Ok(data);
             }
         }
-        [HttpGet()]
-        
+
+
+        private string? CreateLink(int page, int pageSize)
+        {
+            return _generator.GetUriByName(
+                HttpContext,
+                nameof(GetPerson), new { page, pageSize });
+        }
+       
         private object Paging<T>(int page, int pageSize, int total, IEnumerable<T> items)
         {
                 pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
