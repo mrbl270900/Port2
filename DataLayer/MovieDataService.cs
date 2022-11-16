@@ -21,6 +21,15 @@ namespace DataLayer
             return movie;
         }
 
+        public List<person> GetPersonList()
+        {
+            return db.persons.ToList();
+        }
+        public List<movie_title> GetMovieTitleList()
+        {
+            return db.movie_titles.ToList();
+        }
+
         public movie_title? SetMovie(movie_title input)
         {
             db.movie_titles.Add(input);
