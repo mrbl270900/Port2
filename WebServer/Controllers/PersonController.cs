@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using WebServer.Models;
 
+namespace WebServer.Controllers
+
 {
     [Route("api/categories")]
     [ApiController]
