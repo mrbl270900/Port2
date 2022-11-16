@@ -65,7 +65,7 @@ namespace WebServiceSimple.Controllers
             }
 
             var bestmatch = _moviedataService.best_match(input);
-            return Ok(input);
+            return Ok(bestmatch);
 
         }
 
