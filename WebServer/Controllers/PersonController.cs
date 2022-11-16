@@ -26,14 +26,28 @@ namespace WebServer.Controllers
         _generator = generator;
         _mapper = mapper;
         }
+        // todo lav search for person
+
 
         [HttpGet(Name = nameof(GetPersons))]
-        public IActionResult GetPerson()
+        public IActionResult GetPerson(int page = 0, int pageSize = 10, string? search = ?)
         {
-        var Person =
-            _MovieDataService.GetPerson().Select(x => CreatePersonModel(x));
-        return Ok(Person);
-        }
+            if (string.IsNullOrEmpty(search))
 
+            {
+
+                var person =
+                _MovieDataService.GetPerson(page, pageSize).Select(x => CreatePersonModel(x));
+
+                return Ok(Paging(page, pageSize));
+            }
+            else
+
+            {
+                var data = _MovieDataService.GetPerson(search)
+                return Ok(data);
+            }
+        }
+        
 }
 }
