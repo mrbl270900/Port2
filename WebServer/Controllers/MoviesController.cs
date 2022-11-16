@@ -25,9 +25,15 @@ namespace WebServiceSimple.Controllers
         [Authorize] //this shows where I have to get Authorization
         public IActionResult GetMovieTitle(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest();
             
-                var movies = _moviedataService.GetMovieTitle(id);
-                return Ok(movies);
+            }
+            
+            var movies = _moviedataService.GetMovieTitle(id);
+            
+            return Ok(movies);
            
         }
 
