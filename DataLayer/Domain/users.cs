@@ -12,6 +12,8 @@ namespace DataLayer.Domain
 
         public string password { get; set; }
 
+        public string salt { get; set; }
+
         public bool admin { get; set; } = false;
 
     }
