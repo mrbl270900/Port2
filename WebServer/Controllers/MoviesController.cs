@@ -22,7 +22,7 @@ namespace WebServiceSimple.Controllers
         }
 
         [HttpGet]
-        [Authorize] //this shows where I have to get Authorization
+        /*[Authorize] //this shows where I have to get Authorization */
         public IActionResult GetMovieTitle(string id)
         {
             if (string.IsNullOrEmpty(id))
