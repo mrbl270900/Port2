@@ -14,8 +14,8 @@ namespace DataLayer.Domain
 
         public int rating { get; set; }
 
-        public users users { get; set; }
+        public user users { get; set; }
 
-        public movie_titles titles { get; set; }
+        public movie_title titles { get; set; }
     }
 }

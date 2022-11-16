@@ -14,9 +14,9 @@ namespace DataLayer
     {
         public IMDBContext db = new IMDBContext();
 
-        public users? GetUser(string id)
+        public user? GetUser(string id)
         {
-            users? user = db.users.Find(id);
+            user? user = db.users.Find(id);
             return user;
         }
         public void create_name_bookmark(string userid, string nconst)
