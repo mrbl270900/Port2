@@ -16,7 +16,7 @@ namespace DataLayer.Domain
         public string? job { get; set; }
         public string? characters { get; set; }
 
-        public movie_titles titles { get; set; }
+        public movie_title titles { get; set; }
 
         public person persons { get; set; }
 

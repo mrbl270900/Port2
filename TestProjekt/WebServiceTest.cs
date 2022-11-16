@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using DataLayer;
 
 namespace TestProjekt
 {
-    public class AutomapperTest
+    public class WebServiceTest
     {
-        public void AutoMapperTest1()
-        {
-            
+            [Fact]
+            public void Test1()
+            {
 
-  
-        }
+            }
     }
 }

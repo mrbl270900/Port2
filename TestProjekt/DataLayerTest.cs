@@ -32,7 +32,7 @@ namespace TestProjekt
         public void TestGetMovieTitle()
         {
             var service = new MovieDataService();
-            movie_titles? movie = service.GetMovieTitle("tt7856872");
+            movie_title? movie = service.GetMovieTitle("tt7856872");
             Assert.Equal("Apocalypse", movie.primarytitle);
             Assert.Equal("Drama", movie.genres);
         }

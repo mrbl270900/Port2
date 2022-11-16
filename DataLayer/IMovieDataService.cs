@@ -7,7 +7,7 @@ namespace DataLayer
 {
     public interface IMovieDataService
     {
-        movie_titles? GetMovieTitle(string id);
+        movie_title? GetMovieTitle(string id);
         List<BestMatchOut> best_match(List<string> input);
 
         //todo tjek om dette skal med i pogrammet

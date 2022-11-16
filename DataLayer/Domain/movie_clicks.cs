@@ -11,7 +11,7 @@ namespace DataLayer.Domain
         public string tconst { get; set; }
         public int amount { get; set; }
 
-        public movie_titles titles { get; set; }
+        public movie_title titles { get; set; }
 
     }
 }

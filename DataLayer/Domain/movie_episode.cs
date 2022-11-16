@@ -15,8 +15,8 @@ namespace DataLayer.Domain
 
         public int episodenumber { get; set; }
 
-        public movie_titles titles { get; set; }
-        public movie_titles parenttitles { get; set; }
+        public movie_title titles { get; set; }
+        public movie_title parenttitles { get; set; }
 
     }
 }
