@@ -1,4 +1,4 @@
-using Automapper;
+using AutoMapper;
 using DataLayer;
 using DataLayer.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using WebServer.Models;
 
 namespace WebServer.Controllers
 

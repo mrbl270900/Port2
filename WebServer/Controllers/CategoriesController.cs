@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataLayer;
 using DataLayer.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Models;
 
