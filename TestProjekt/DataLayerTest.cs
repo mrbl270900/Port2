@@ -12,7 +12,7 @@ namespace TestProjekt
         [Fact]
         public void TestMovie_titleClass()
         {
-            movie_titles movie = new movie_titles();
+            movie_title movie = new movie_title();
             Assert.Null(movie.tconst);
             Assert.Null(movie.primarytitle);
             Assert.Null(movie.title);
