@@ -8,6 +8,25 @@ namespace TestProjekt
     {
         //todo lave test til vores domains og modeler
 
+        //herunder tester vi vores classes movie title samt person og ser på at de vigtigste værdier opføre sig som de skal
+        [Fact]
+        public void TestMovie_titleClass()
+        {
+            movie_title movie = new movie_title();
+            Assert.Null(movie.tconst);
+            Assert.Null(movie.primarytitle);
+            Assert.Null(movie.title);
+        }
+
+        [Fact]
+        public void TestPersonClass()
+        {
+            person person = new person();
+            Assert.Null(person.nconst);
+            Assert.Null(person.primaryname);
+            Assert.Null(person.birthyear);
+        }
+
 
         [Fact]
         public void TestGetMovieTitle()
