@@ -103,13 +103,13 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public void user_signup(string userid, string password)
+        public void user_signup(string userid, string password, string hash, string salt)
         {
             db.Database.ExecuteSqlInterpolated($"select user_signup({userid},{password})");
             db.SaveChanges();
         }
 
-        public void user_signup(string userid, string password, bool admin)
+        public void user_signup(string userid, string password, bool admin, string hash, string salt)
         {
             db.Database.ExecuteSqlInterpolated($"select user_signup({userid},{password}, {admin})");
             db.SaveChanges();
