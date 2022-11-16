@@ -14,7 +14,7 @@ namespace DataLayer.Domain
 
         public DateTime sh_timestamp { get; set; }
 
-        public users users { get; set; }
+        public user users { get; set; }
 
     }
 }

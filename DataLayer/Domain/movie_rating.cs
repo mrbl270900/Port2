@@ -14,6 +14,6 @@ namespace DataLayer.Domain
 
         public int numvotes { get; set; }
 
-        public movie_titles titles { get; set; }
+        public movie_title titles { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace DataLayer.Domain
         public string? attributes { get; set; }
         public bool isoriginaltitle { get; set; }
 
-        public movie_titles movie_titles { get; set; }
+        public movie_title movie_titles { get; set; }
 
     }
 }

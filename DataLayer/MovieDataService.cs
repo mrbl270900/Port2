@@ -15,19 +15,19 @@ namespace DataLayer
     {
         public IMDBContext db = new IMDBContext();
 
-        public movie_titles? GetMovieTitle(string id)
+        public movie_title? GetMovieTitle(string id)
         {
-            movie_titles? movie = db.movie_titles.Find(id);
+            movie_title? movie = db.movie_titles.Find(id);
             return movie;
         }
 
-        public movie_titles? SetMovie(movie_titles input)
+        public movie_title? SetMovie(movie_title input)
         {
             db.movie_titles.Add(input);
             db.SaveChanges();
             return input;
         }
-        public movie_titles? DeleteMovie(movie_titles input)
+        public movie_title? DeleteMovie(movie_title input)
         {
             db.movie_titles.Remove(input);
             db.SaveChanges();

@@ -6,9 +6,9 @@ namespace DataLayer
 {
     public class IMDBContext : DbContext
     {
-        public DbSet<movie_titles> movie_titles { get; set; }
+        public DbSet<movie_title> movie_titles { get; set; }
         public DbSet<person> persons { get; set; }
-        public DbSet<users> users { get; set; }
+        public DbSet<user> users { get; set; }
         public DbSet<movie_akas> movie_akas { get; set; }
         public DbSet<movie_episode> movie_episodes { get; set; }
         public DbSet<movie_partof> movie_partof { get; set; }
@@ -19,7 +19,7 @@ namespace DataLayer
         public DbSet<title_search> title_searches { get; set; }
         public DbSet<user_bookmark_name> user_bookmark_names { get; set; }
         public DbSet<user_rating> user_rating { get; set; }
-        public DbSet<users_bookmark_title> users_bookmark_titles { get; set; }
+        public DbSet<user_bookmark_title> users_bookmark_titles { get; set; }
         public DbSet<wi> wis { get; set; }
         public DbSet<BestMatchOut> bestmatchouts { get; set;}
         public DbSet<MovieActorOut> movieactorout { get; set; }
@@ -36,17 +36,17 @@ namespace DataLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<movie_titles>().ToTable("movie_title");
-            modelBuilder.Entity<movie_titles>().HasKey(x => new { x.tconst });
-            modelBuilder.Entity<movie_titles>().Property(x => x.tconst).HasColumnName("tconst");
-            modelBuilder.Entity<movie_titles>().Property(x => x.title).HasColumnName("title");
-            modelBuilder.Entity<movie_titles>().Property(x => x.primarytitle).HasColumnName("primarytitle");
-            modelBuilder.Entity<movie_titles>().Property(x => x.originaltitle).HasColumnName("originaltitle");
-            modelBuilder.Entity<movie_titles>().Property(x => x.isadult).HasColumnName("isadult");
-            modelBuilder.Entity<movie_titles>().Property(x => x.startyear).HasColumnName("startyear");
-            modelBuilder.Entity<movie_titles>().Property(x => x.endyear).HasColumnName("endyear");
-            modelBuilder.Entity<movie_titles>().Property(x => x.runtimeminutes).HasColumnName("runtimeminutes");
-            modelBuilder.Entity<movie_titles>().Property(x => x.genres).HasColumnName("genres");
+            modelBuilder.Entity<movie_title>().ToTable("movie_title");
+            modelBuilder.Entity<movie_title>().HasKey(x => new { x.tconst });
+            modelBuilder.Entity<movie_title>().Property(x => x.tconst).HasColumnName("tconst");
+            modelBuilder.Entity<movie_title>().Property(x => x.title).HasColumnName("title");
+            modelBuilder.Entity<movie_title>().Property(x => x.primarytitle).HasColumnName("primarytitle");
+            modelBuilder.Entity<movie_title>().Property(x => x.originaltitle).HasColumnName("originaltitle");
+            modelBuilder.Entity<movie_title>().Property(x => x.isadult).HasColumnName("isadult");
+            modelBuilder.Entity<movie_title>().Property(x => x.startyear).HasColumnName("startyear");
+            modelBuilder.Entity<movie_title>().Property(x => x.endyear).HasColumnName("endyear");
+            modelBuilder.Entity<movie_title>().Property(x => x.runtimeminutes).HasColumnName("runtimeminutes");
+            modelBuilder.Entity<movie_title>().Property(x => x.genres).HasColumnName("genres");
 
             modelBuilder.Entity<person>().ToTable("person");
             modelBuilder.Entity<person>().HasKey(x => new { x.nconst });
@@ -57,11 +57,11 @@ namespace DataLayer
             modelBuilder.Entity<person>().Property(x => x.primaryprofession).HasColumnName("primaryprofession");
             modelBuilder.Entity<person>().Property(x => x.name_rating).HasColumnName("name_rating");
 
-            modelBuilder.Entity<users>().ToTable("users");
-            modelBuilder.Entity<users>().HasKey(x => new { x.userid });
-            modelBuilder.Entity<users>().Property(x => x.userid).HasColumnName("userid");
-            modelBuilder.Entity<users>().Property(x => x.password).HasColumnName("password");
-            modelBuilder.Entity<users>().Property(x => x.admin).HasColumnName("admin");
+            modelBuilder.Entity<user>().ToTable("users");
+            modelBuilder.Entity<user>().HasKey(x => new { x.userid });
+            modelBuilder.Entity<user>().Property(x => x.userid).HasColumnName("userid");
+            modelBuilder.Entity<user>().Property(x => x.password).HasColumnName("password");
+            modelBuilder.Entity<user>().Property(x => x.admin).HasColumnName("admin");
 
             modelBuilder.Entity<movie_akas>().ToTable("movie_akas");
             modelBuilder.Entity<movie_akas>().HasKey(x => new { x.titleid, x.ordering });
@@ -131,10 +131,10 @@ namespace DataLayer
             modelBuilder.Entity<user_rating>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<user_rating>().Property(x => x.rating).HasColumnName("rating");
 
-            modelBuilder.Entity<users_bookmark_title>().ToTable("users_bookmark_title");
-            modelBuilder.Entity<users_bookmark_title>().HasKey(x => new { x.userid, x.tconst });
-            modelBuilder.Entity<users_bookmark_title>().Property(x => x.userid).HasColumnName("userid");
-            modelBuilder.Entity<users_bookmark_title>().Property(x => x.tconst).HasColumnName("tconst");
+            modelBuilder.Entity<user_bookmark_title>().ToTable("users_bookmark_title");
+            modelBuilder.Entity<user_bookmark_title>().HasKey(x => new { x.userid, x.tconst });
+            modelBuilder.Entity<user_bookmark_title>().Property(x => x.userid).HasColumnName("userid");
+            modelBuilder.Entity<user_bookmark_title>().Property(x => x.tconst).HasColumnName("tconst");
 
             modelBuilder.Entity<wi>().ToTable("wi");
             modelBuilder.Entity<wi>().HasKey(x => new { x.tconst, x.word, x.field });

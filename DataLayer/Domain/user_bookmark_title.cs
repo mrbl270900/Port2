@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Domain
 {
-    public class users
+    public class user_bookmark_title
     {
         public string userid { get; set; }
 
-        public string password { get; set; }
+        public string tconst { get; set; }
 
-        public string salt { get; set; }
-
-        public bool admin { get; set; } = false;
-
+        public movie_title titles { get; set; }
     }
 }
