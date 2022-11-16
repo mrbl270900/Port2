@@ -1,4 +1,5 @@
 using DataLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -78,6 +79,20 @@ namespace WebServiceToken.Controllers
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return Ok(new { user.userid, token = jwt });
+
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult create_title_bookmark(string userid, string tconst)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst))
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
 
         }
     }

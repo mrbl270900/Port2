@@ -1,4 +1,3 @@
-// Hashing.cs
 
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
@@ -14,11 +13,6 @@ public class Hashing
     private HashAlgorithm sha256 = SHA256.Create();
     protected RandomNumberGenerator rand = RandomNumberGenerator.Create();
 
-    // hash(string password)
-    // called from Authenticator.register()
-    // where salt and hashed password have not been generated,
-    // so both are returned for storing in the password database
-
     public (string hash, string salt) hash(string password)
     {
         byte[] salt = new byte[saltbytesize];
@@ -28,8 +22,6 @@ public class Hashing
         return (hash, saltstring);
     }
 
-    // verify(string login_password, string hashed_registered_password, string saltstring)
-    // is called from Authenticator.login()
 
     public bool Verify(string loginPassword, string hashedRegisteredPassword, string saltString)
     {
@@ -38,16 +30,14 @@ public class Hashing
         else return false;
     }
 
-    // hashSHA256 is the "workhorse" --- the actual hashing
 
     private string hashSHA256(string password, string saltstring)
     {
-        byte[] hashinput = Encoding.UTF8.GetBytes(saltstring + password); // perhaps encode only the password part?
+        byte[] hashinput = Encoding.UTF8.GetBytes(saltstring + password); 
         byte[] hashoutput = sha256.ComputeHash(hashinput);
         return Convert.ToHexString(hashoutput);
     }
 
-    // how much time does it take to compute a bunch of hash values?
 
     public void hash_measurement()
     {

@@ -41,21 +41,6 @@ namespace WebServiceSimple.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public IActionResult create_title_bookmark(string userid, string tconst)
-        {
-            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst))
-            {
-                return BadRequest();
-
-            }
-
-            var bookMarkTitle = _userdataService.create_title_bookmark(userid, tconst);
-            return Ok();
-
-        }
-
-        [HttpGet]
         public IActionResult best_match_search(List<string> input)
         {
 
