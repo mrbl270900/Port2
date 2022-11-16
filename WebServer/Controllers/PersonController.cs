@@ -14,13 +14,15 @@ namespace WebServer.Controllers
 {
     [Route("api/categories")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class PersonController : ControllerBase
     {
         private IMovieDataService _moviedataservice;
         private readonly LinkGenerator _generator;
         private readonly IMapper _mapper;
+        private readonly int MaxPageSize;
 
-        public CategoriesController(IMovieDataService dataService, LinkGenerator generator, IMapper mapper)
+
+        public PersonController(IMovieDataService dataService, LinkGenerator generator, IMapper mapper)
         {
         _moviedataservice = dataService;
         _generator = generator;
@@ -29,17 +31,17 @@ namespace WebServer.Controllers
         // todo lav search for person
 
 
-        [HttpGet(Name = nameof(GetPersons))]
-        public IActionResult GetPerson(int page = 0, int pageSize = 10, string? search = ?)
+        [HttpGet(Name = nameof(GetPerson))]
+        public IActionResult GetPerson(string? search, int page = 0, int pageSize = 10)
         {
             if (string.IsNullOrEmpty(search))
 
             {
 
                 var person =
-                _moviedataservice.GetPerson(page, pageSize).Select(x => CreatePersonModel(x));
+                _moviedataservice.GetPersonList();
 
-                return Ok(Paging(page, pageSize));
+                return Ok(Paging(page, pageSize, person.Count, person));
             }
             else
 

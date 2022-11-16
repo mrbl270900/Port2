@@ -21,5 +21,6 @@ namespace DataLayer
         List<WordOut> word_word_match(List<string> input);
         void movie_visited(string tconst);
         void name_rating_setter();
+        person? GetPerson(string id);
     }
 }
