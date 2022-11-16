@@ -15,6 +15,11 @@ namespace DataLayer
     {
         public IMDBContext db = new IMDBContext();
 
+        public movie_title? GetMovie(string id)
+        {
+            movie_title? movie = db.movie_titles.Find(id);
+            return movie;
+        }
         public movie_title? GetMovieTitle(string id)
         {
             movie_title? movie = db.movie_titles.Find(id);
