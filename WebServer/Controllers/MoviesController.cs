@@ -1,6 +1,9 @@
 ﻿using DataLayer;
+using DataLayer.Domain;
+using DataLayer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 using WebServer.Models;
 using WebServiceToken.Models;
 
@@ -37,5 +40,56 @@ namespace WebServiceSimple.Controllers
            
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult create_title_bookmark(string userid, string tconst)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst))
+            {
+                return BadRequest();
+
+            }
+
+            var bookMarkTitle = _userdataService.create_title_bookmark(userid, tconst);
+            return Ok();
+
+        }
+
+        [HttpGet]
+        public IActionResult best_match_search(List<string> input)
+        {
+
+            if (input == null && !input.Any())
+            {
+                return BadRequest();
+            }
+
+            var bestmatch = _moviedataService.best_match(input);
+            return Ok(input);
+
+        }
+
+        [HttpGet]
+        public IActionResult movie_visited(string tconst)
+        {
+            if (string.IsNullOrEmpty(tconst)) 
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+
+        }
+
+        public IActionResult similar_movies(string tconst)
+        {
+
+            if (string.IsNullOrEmpty(tconst))
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }
