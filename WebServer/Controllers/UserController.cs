@@ -183,7 +183,15 @@ namespace WebServiceToken.Controllers
                 return BadRequest();
 
             }
+            try
+            {
+                _userdataService.delete_name_bookmark(userid, tconst);
+            }
+            catch
+            {
+                return BadRequest();
 
+            }
 
             return Ok();
 
@@ -196,6 +204,15 @@ namespace WebServiceToken.Controllers
             {
                 return BadRequest();
 
+            }
+
+            try
+            {
+                _userdataService.delete_user(userid);
+            }
+            catch 
+            { 
+                return BadRequest();
             }
 
 
