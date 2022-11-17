@@ -43,9 +43,9 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public void delete_rating(string userid, string tconst, int rating)
+        public void delete_rating(string userid, string tconst)
         {
-            db.Database.ExecuteSqlInterpolated($"select delete_rating({userid},{tconst},{rating})");
+            db.Database.ExecuteSqlInterpolated($"select delete_rating({userid},{tconst})");
             db.SaveChanges();
         }
 
