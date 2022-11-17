@@ -1,6 +1,5 @@
 using DataLayer;
 using DataLayer.Domain;
-using DataLayer.Models;
 
 namespace TestProjekt
 {
