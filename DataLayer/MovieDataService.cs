@@ -114,7 +114,7 @@ namespace DataLayer
 
         public person? GetPerson(string id)
         {
-            person? person = db.persons.Find(id);
+            person? person = db.persons.FirstOrDefault(x => x.nconst == id);
             return person;
         }
 
@@ -177,7 +177,7 @@ namespace DataLayer
 
         public List<MovieActorOut> movie_actors_by_rating(string tconst)
         {
-            var result = db.movieactorout.FromSqlInterpolated($"select * movie_actors_by_rating({tconst})");
+            var result = db.movieactorout.FromSqlInterpolated($"select * from movie_actors_by_rating({tconst})");
             return result.ToList();
         }
 

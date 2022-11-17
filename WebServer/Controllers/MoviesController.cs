@@ -25,7 +25,6 @@ namespace WebServiceSimple.Controllers
         }
 
         [HttpGet ("{id}", Name = nameof(GetMovieTitle))]
-        /*[Authorize] //this shows where I have to get Authorization */
         public IActionResult GetMovieTitle(string id)
         {
             if (string.IsNullOrEmpty(id))

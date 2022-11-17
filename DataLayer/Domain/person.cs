@@ -6,9 +6,9 @@
 
         public string primaryname { get; set; }
 
-        public int? birthyear { get; set; }
+        public string? birthyear { get; set; }
 
-        public int? deathyear { get; set; }
+        public string? deathyear { get; set; }
 
         public string? primaryprofession { get; set; }
 

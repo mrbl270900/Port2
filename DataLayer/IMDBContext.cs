@@ -160,8 +160,8 @@ namespace DataLayer
 
             modelBuilder.Entity<MovieActorOut>().HasNoKey();
             modelBuilder.Entity<MovieActorOut>().Property(x => x.nconst).HasColumnName("nconst");
-            modelBuilder.Entity<MovieActorOut>().Property(x => x.name).HasColumnName("name");
-            modelBuilder.Entity<MovieActorOut>().Property(x => x.tal).HasColumnName("tal");
+            modelBuilder.Entity<MovieActorOut>().Property(x => x.primaryname).HasColumnName("primaryname");
+            modelBuilder.Entity<MovieActorOut>().Property(x => x.name_rating).HasColumnName("name_rating");
 
             modelBuilder.Entity<WordOut>().HasNoKey();
             modelBuilder.Entity<WordOut>().Property(x => x.weight).HasColumnName("weight");

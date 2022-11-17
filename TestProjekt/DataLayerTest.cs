@@ -37,6 +37,15 @@ namespace TestProjekt
         }
 
         [Fact]
+        public void TestGetPerson()
+        {
+            var service = new MovieDataService();
+            person? movie = service.GetPerson("nm0037628");
+            Assert.Equal("Apocalypse", movie.primaryname);
+            Assert.Equal(2 , movie.name_rating);
+        }
+
+        [Fact]
         public void Testbest_match()
         {
             var service = new MovieDataService();

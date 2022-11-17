@@ -23,28 +23,35 @@ namespace WebServer.Controllers
         _mapper = mapper;
         }
 
-
-        [HttpGet(Name = nameof(GetPerson))]
-        public IActionResult GetPerson(string? search, int page = 0, int pageSize = 10)
+        [HttpGet(Name = nameof(GetPersons))]
+        public IActionResult GetPersons()
         {
-            if (string.IsNullOrEmpty(search))
-
+            var data = _moviedataservice.GetPersonList();
+            if (data != null)
             {
-
-                var person =
-                _moviedataservice.GetPersonList();
-
-                return Ok(Paging(page, pageSize, person.Count, person));
-            }
-            else
-
-            {
-                var data = _moviedataservice.GetPerson(search);
                 return Ok(data);
             }
+            return NotFound();
         }
+
+        [HttpGet("{nconst}", Name = nameof(GetPerson))]
+        public IActionResult GetPerson([FromRoute] string nconst)
+        {
+            if (string.IsNullOrEmpty(nconst))
+            {
+                BadRequest();
+            }
+                var data = _moviedataservice.GetPerson(nconst);
+            if (data != null)
+            {
+                return Ok(data);
+            }
+                return NotFound();
+        }
+
         [HttpGet]
-        public IActionResult find_coplayers(string nconst)
+        [Route("{nconst}/findcoplayers")]
+        public IActionResult find_coplayers([FromRoute] string nconst)
         {
             if (string.IsNullOrEmpty(nconst))
 
@@ -57,19 +64,26 @@ namespace WebServer.Controllers
             
         }
         [HttpGet]
-        public IActionResult movie_actors_by_rating(string tconst)
+        [Route("{tconst}/movieactorsbyrating")]
+        public IActionResult movie_actors_by_rating([FromRoute] string tconst)
         {
             if (string.IsNullOrEmpty(tconst))
-
             {
                 return BadRequest();
             }
 
             var data = _moviedataservice.movie_actors_by_rating(tconst);
-            return Ok(data);
+            if (data != null)
+            {
+                return Ok(data);
+            }
+                return NotFound();
 
         }
+
+
         [HttpGet]
+        [Route("nameratingsetter")]
         [Authorize]
         public IActionResult name_rating_setter()
         {

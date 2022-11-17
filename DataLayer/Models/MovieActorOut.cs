@@ -10,7 +10,7 @@ namespace DataLayer.Models
     {
         public string nconst { get; set; }
 
-        public string name { get; set; }
-        public int tal { get; set; }
+        public string primaryname { get; set; }
+        public int name_rating { get; set; }
     }
 }
