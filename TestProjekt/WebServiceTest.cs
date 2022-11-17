@@ -2,16 +2,28 @@
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Net;
+using WebServer;
+using WebServiceToken.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace TestProjekt
 {
     public class WebServiceTest
     {
             [Fact]
-            public void GetAllPersonsTest()
+            public void RegisterUserTest()
             {
-                
-            }
+            var data = new
+            {
+                Username = "admin",
+                Password = "admin"
+            };
+
+
+             var x =  PostData("http://localhost:5001/api/users/register", data);
+            Assert.Equal(HttpStatusCode.OK, x.Item2);
+
+        }
 
 
         (JArray, HttpStatusCode) GetArray(string url)
