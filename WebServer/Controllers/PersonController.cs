@@ -24,7 +24,8 @@ namespace WebServer.Controllers
         }
 
         [HttpGet(Name = nameof(GetPersons))]
-        public IActionResult GetPersons()
+        [Route("{page}/{pagesize}")]
+        public IActionResult GetPersons([FromRoute] int page = 0, [FromRoute] int pagesize = 25)
         {
             var data = _moviedataservice.GetPersonList();
             if (data != null)

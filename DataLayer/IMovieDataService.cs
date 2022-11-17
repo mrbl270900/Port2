@@ -6,7 +6,9 @@ namespace DataLayer
     public interface IMovieDataService
     {
         List<person> GetPersonList();
+        List<person> GetPersonList(int page, int pagesize);
         List<movie_title> GetMovieTitleList();
+        List<movie_title> GetMovieTitleList(int page, int pagesize);
         movie_title? GetMovieTitle(string id);
         List<BestMatchOut> best_match(List<string> input);
 

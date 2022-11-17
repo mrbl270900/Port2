@@ -27,10 +27,11 @@ namespace WebServiceSimple.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = nameof(GetMovies))]
-        public IActionResult GetMovies()
+        [HttpGet( Name = nameof(GetMovies))]
+        [Route("{page}/{pagesize}")]
+        public IActionResult GetMovies([FromRoute] int page = 0, [FromRoute] int pagesize = 25)
         {
-            var data = _moviedataService.GetMovieTitleList();
+            var data = _moviedataService.GetMovieTitleList(page, pagesize);
             if (data != null)
             {
                 return Ok(data);

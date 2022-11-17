@@ -1,6 +1,7 @@
 ﻿using DataLayer.Domain;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace DataLayer
 {
@@ -18,9 +19,20 @@ namespace DataLayer
         {
             return db.persons.ToList();
         }
+
+        public List<person> GetPersonList(int page = 0, int pagesize = 25)
+        {
+            return db.persons.Skip(page*pagesize).Take(pagesize).ToList();
+        }
+
         public List<movie_title> GetMovieTitleList()
         {
             return db.movie_titles.ToList();
+        }
+
+        public List<movie_title> GetMovieTitleList(int page = 0, int pagesize = 25)
+        {
+            return db.movie_titles.Skip(page * pagesize).Take(pagesize).ToList();
         }
 
         public movie_title? SetMovie(movie_title input)
