@@ -15,7 +15,7 @@ namespace DataLayer
         void create_rating(string userid, string tconst, int rating);
         void create_title_bookmark(string userid, string tconst);
         void delete_name_bookmark(string userid, string nconst);
-        void delete_rating(string userid, string tconst, int rating);
+        void delete_rating(string userid, string tconst);
         void delete_search(string userid);
         void delete_search_name(string userid);
         void delete_search_title(string userid);
