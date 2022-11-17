@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using AutoMapper;
+using DataLayer;
 using DataLayer.Domain;
 using DataLayer.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -9,23 +10,36 @@ using WebServiceToken.Models;
 
 namespace WebServiceSimple.Controllers
 {
-    [ApiController]
     [Route("api/movies")]
+    [ApiController]
 
     public class MoviesController : ControllerBase
     {
         private readonly IMovieDataService _moviedataService;
         private readonly LinkGenerator _generator;
-        private readonly autoMapper _mapper;
+        private readonly IMapper _mapper;
+        private readonly int MaxPageSize;
 
-        public MoviesController(IMovieDataService moviedataService, LinkGenerator generator, autoMapper _mapper)
+        public MoviesController(IMovieDataService moviedataService, LinkGenerator generator, IMapper mapper)
         {
             _moviedataService = moviedataService;
             _generator = generator;
+            _mapper = mapper;
+        }
+
+        [HttpGet(Name = nameof(GetMovies))]
+        public IActionResult GetMovies()
+        {
+            var data = _moviedataService.GetMovieTitleList();
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            return NotFound();
         }
 
         [HttpGet ("{id}", Name = nameof(GetMovieTitle))]
-        public IActionResult GetMovieTitle([FromRoute]string id)
+        public IActionResult GetMovieTitle([FromRoute] string id)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -39,6 +53,7 @@ namespace WebServiceSimple.Controllers
         }
 
         [HttpGet]
+        [Route("bestmatch")]
         public IActionResult best_match_search(List<string> input)
         {
 
@@ -53,7 +68,8 @@ namespace WebServiceSimple.Controllers
         }
 
         [HttpGet]
-        public IActionResult movie_visited(string tconst)
+        [Route("{tconst}/visited")]
+        public IActionResult movie_visited([FromRoute]string tconst)
         {
             if (string.IsNullOrEmpty(tconst)) 
             {
@@ -65,7 +81,8 @@ namespace WebServiceSimple.Controllers
         }
 
         [HttpGet]
-        public IActionResult similar_movies(string tconst)
+        [Route("{tconst}/similarmovies")]
+        public IActionResult similar_movies([FromRoute]string tconst)
         {
 
             if (string.IsNullOrEmpty(tconst))
@@ -75,5 +92,52 @@ namespace WebServiceSimple.Controllers
 
             return Ok();
         }
+
+        private string? CreateLink(int page, int pageSize)
+        {
+            return _generator.GetUriByName(
+                HttpContext,
+                nameof(GetMovies), new { page, pageSize });
+        }
+
+        private object Paging<T>(int page, int pageSize, int total, IEnumerable<T> items)
+        {
+            pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
+
+            //if (pageSize > MaxPageSize)
+            //{
+            //    pageSize = MaxPageSize;
+            //}
+
+            var pages = (int)Math.Ceiling((double)total / (double)pageSize)
+                ;
+
+            var first = total > 0
+                ? CreateLink(0, pageSize)
+                : null;
+
+            var prev = page > 0
+                ? CreateLink(page - 1, pageSize)
+                : null;
+
+            var current = CreateLink(page, pageSize);
+
+            var next = page < pages - 1
+                ? CreateLink(page + 1, pageSize)
+                : null;
+
+            var result = new
+            {
+                first,
+                prev,
+                next,
+                current,
+                total,
+                pages,
+                items
+            };
+            return result;
+        }
+
     }
 }
