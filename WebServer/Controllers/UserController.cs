@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 using WebServiceToken.Models;
@@ -93,6 +94,111 @@ namespace WebServiceToken.Controllers
             }
 
           
+            return Ok();
+
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult create_name_bookmark(string userid, string nconst)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(nconst))
+            {
+                return BadRequest();
+
+            }
+
+
+            return Ok();
+
+        }
+        [HttpGet]
+        [Authorize]
+        public IActionResult create_rating(string userid, string tconst, int rating)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst) && rating == null)
+            {
+                return BadRequest();
+
+            }
+
+
+            return Ok();
+
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public IActionResult delete_name_bookmark(string userid, string nconst) 
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(nconst))
+            {
+                return BadRequest();
+
+            }
+            try
+            {
+                _userdataService.delete_name_bookmark(userid, nconst);
+            }
+            catch 
+            {
+                return BadRequest();
+            
+            }
+
+            return Ok();
+
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public IActionResult delete_rating(string userid, string tconst)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst))
+            {
+                return BadRequest();
+
+            }
+            try
+            {
+                _userdataService.delete_rating(userid, tconst);
+
+            }
+            catch 
+            { 
+                return BadRequest();
+            
+            }
+            
+
+            return Ok();
+
+        }
+        [HttpGet]
+        [Authorize]
+        public IActionResult delete_title_bookmark(string userid, string tconst)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst))
+            {
+                return BadRequest();
+
+            }
+
+
+            return Ok();
+
+        }
+        [HttpGet]
+        [Authorize]
+        public IActionResult delete_user(string userid)
+        {
+            if (string.IsNullOrEmpty(userid))
+            {
+                return BadRequest();
+
+            }
+
+
             return Ok();
 
         }
