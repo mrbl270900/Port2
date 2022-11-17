@@ -24,7 +24,7 @@ namespace WebServiceSimple.Controllers
             _generator = generator;
         }
 
-        [HttpGet]
+        [HttpGet ("{id}", Name = nameof(GetMovieTitle))]
         /*[Authorize] //this shows where I have to get Authorization */
         public IActionResult GetMovieTitle(string id)
         {
