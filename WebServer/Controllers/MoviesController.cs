@@ -25,12 +25,11 @@ namespace WebServiceSimple.Controllers
         }
 
         [HttpGet ("{id}", Name = nameof(GetMovieTitle))]
-        public IActionResult GetMovieTitle(string id)
+        public IActionResult GetMovieTitle([FromRoute]string id)
         {
             if (string.IsNullOrEmpty(id))
             {
                 return BadRequest();
-            
             }
             
             var movies = _moviedataService.GetMovieTitle(id);

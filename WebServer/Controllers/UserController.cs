@@ -2,6 +2,7 @@ using DataLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -26,27 +27,28 @@ namespace WebServiceToken.Controllers
 
         }
         [HttpPost("register")]
+        [Route("register")]
         public IActionResult Register(UserCreateModel model)
         {
             if (_userdataService.GetUser(model.Username) != null)
             {
                 return BadRequest();
-
             }
 
             if (string.IsNullOrEmpty(model.Password))
             {
                 return BadRequest();
-
             }
+
             var hashResult = _hashing.hash(model.Password);
 
-            _userdataService.user_signup(model.Name, model.Username, hashResult.hash, hashResult.salt);
+            _userdataService.user_signup(model.Username, hashResult.hash, hashResult.salt);
 
             return Ok();
 
         }
         [HttpPost("login")]
+        [Route("login")]
         public IActionResult Login(UserLoginModel model)
         {
             var user = _userdataService.GetUser(model.Username);
@@ -82,7 +84,8 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpGet]
+
+        [HttpPost]
         [Authorize]
         public IActionResult create_title_bookmark(string userid, string tconst)
         {
@@ -97,7 +100,7 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         public IActionResult create_name_bookmark(string userid, string nconst)
         {
@@ -111,7 +114,7 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         public IActionResult create_rating(string userid, string tconst, int rating)
         {
@@ -173,7 +176,7 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
-        [HttpGet]
+        [HttpDelete]
         [Authorize]
         public IActionResult delete_title_bookmark(string userid, string tconst)
         {
@@ -195,7 +198,7 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
-        [HttpGet]
+        [HttpDelete]
         [Authorize]
         public IActionResult delete_user(string userid)
         {

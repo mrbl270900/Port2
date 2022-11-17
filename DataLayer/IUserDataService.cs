@@ -20,7 +20,7 @@ namespace DataLayer
         void search_name(string userid, string nconst);
         void search_title(string userid, string tconst);
         void search_word(string userid, string word);
-        void user_signup(string userid, string password, string hash, string salt);
+        void user_signup(string userid, string password, string salt);
         void user_signup(string userid, string password, bool admin, string hash, string salt);
     }
 }
