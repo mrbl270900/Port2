@@ -12,7 +12,7 @@ using System.Xml.Linq;
 namespace WebServer.Controllers
 
 {
-    [Route("api/categories")]
+    [Route("api/person")]
     [ApiController]
     public class PersonController : ControllerBase
     {

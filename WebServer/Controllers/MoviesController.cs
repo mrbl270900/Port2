@@ -66,6 +66,7 @@ namespace WebServiceSimple.Controllers
 
         }
 
+        [HttpGet]
         public IActionResult similar_movies(string tconst)
         {
 
