@@ -1,10 +1,14 @@
 using AutoMapper;
 using DataLayer;
 using DataLayer.Domain;
+using DataLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -28,7 +32,6 @@ namespace WebServer.Controllers
         _generator = generator;
         _mapper = mapper;
         }
-        // todo lav search for person
 
 
         [HttpGet(Name = nameof(GetPerson))]
@@ -49,6 +52,42 @@ namespace WebServer.Controllers
                 var data = _moviedataservice.GetPerson(search);
                 return Ok(data);
             }
+        }
+        [HttpGet]
+        public IActionResult find_coplayers(string nconst)
+        {
+            if (string.IsNullOrEmpty(nconst))
+
+            {
+                return BadRequest();
+            }
+            
+                var data = _moviedataservice.find_coplayers(nconst);
+                return Ok(data);
+            
+        }
+        [HttpGet]
+        public IActionResult movie_actors_by_rating(string tconst)
+        {
+            if (string.IsNullOrEmpty(tconst))
+
+            {
+                return BadRequest();
+            }
+
+            var data = _moviedataservice.movie_actors_by_rating(tconst);
+            return Ok(data);
+
+        }
+        [HttpGet]
+        [Authorize]
+        public IActionResult name_rating_setter()
+        {
+
+            _moviedataservice.name_rating_setter();
+ 
+            return Ok();
+
         }
 
 
