@@ -1,10 +1,15 @@
 ﻿using DataLayer.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WebServer.Models
 {
-    public class PersonMap
+    public class personModel
     {
-        public string url { get; set; }
+        public string? Url { get; set; }
 
         public string primaryname { get; set; }
 

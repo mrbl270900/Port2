@@ -1,5 +1,6 @@
 using AutoMapper;
 using DataLayer;
+using DataLayer.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Models;
@@ -28,11 +29,10 @@ namespace WebServer.Controllers
         [Route("{page}/{pagesize}")]
         public IActionResult GetPersons([FromRoute] int page = 0, [FromRoute] int pagesize = 25)
         {
-            var data = _moviedataservice.GetPersonList(page, pagesize);
+            var data = _moviedataservice.GetPersonList(page, pagesize).Select(x => CreatePersonModel(x));
             if (data != null)
             {
-                var _mappedPerson = _mapper.Map<PersonMap>(data);
-                return Ok(_mappedPerson);
+                return Ok(data);
             }
             return NotFound();
         }
@@ -47,7 +47,8 @@ namespace WebServer.Controllers
                 var data = _moviedataservice.GetPerson(nconst);
             if (data != null)
             {
-                return Ok(data);
+                var model = CreatePersonModel(data);
+                return Ok(model);
             }
                 return NotFound();
         }
@@ -143,7 +144,12 @@ namespace WebServer.Controllers
                 };
                 return result;
         }
-
+        private personModel CreatePersonModel(person person)
+        {
+            var model = _mapper.Map<personModel>(person);
+            model.Url = _generator.GetUriByName(HttpContext, nameof(GetPerson), new { person.nconst });
+            return model;
+        }
 
     }
 }

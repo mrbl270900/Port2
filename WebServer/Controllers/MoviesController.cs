@@ -140,5 +140,13 @@ namespace WebServiceSimple.Controllers
             return result;
         }
 
+        private movieModel CreateMovieModel(movie_title movie)
+        {
+            var model = _mapper.Map<movieModel>(movie);
+            model.Url = _generator.GetUriByName(HttpContext, nameof(GetMovies), new { movie.tconst });
+            return model;
+        }
+
+
     }
 }

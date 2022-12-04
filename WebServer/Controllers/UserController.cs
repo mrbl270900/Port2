@@ -1,11 +1,14 @@
 using DataLayer;
+using DataLayer.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Text;
+using WebServer.Models;
 using WebServiceToken.Models;
 
 
@@ -221,5 +224,14 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
+
+        private userModel CreateUserModel(user user)
+        {
+            var model = _mapper.Map<userModel>(user);
+            model.Url = _generator.GetUriByName(HttpContext, nameof(GetUser), new { user.userid });
+            return model;
+        }
+
+
     }
 }
