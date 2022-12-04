@@ -51,16 +51,16 @@ namespace WebServer.Controllers
         }
 
         [HttpGet]
-        [Route("{nconst}/findcoplayers")]
-        public IActionResult find_coplayers([FromRoute] string nconst)
+        [Route("{name}/findcoplayers")]
+        public IActionResult find_coplayers([FromRoute] string name)
         {
-            if (string.IsNullOrEmpty(nconst))
+            if (string.IsNullOrEmpty(name))
 
             {
                 return BadRequest();
             }
             
-                var data = _moviedataservice.find_coplayers(nconst);
+                var data = _moviedataservice.find_coplayers(name);
                 return Ok(data);
             
         }

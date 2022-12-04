@@ -26,7 +26,7 @@ namespace DataLayer
         public DbSet<MovieActorOut> movieactorout { get; set; }
         public DbSet<WordOut> wordout { get; set; }
         public DbSet<LoginOut> loginout { get; set; }
-
+        public DbSet<CoPlayersOut> coPlayersOuts { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -166,6 +166,11 @@ namespace DataLayer
             modelBuilder.Entity<WordOut>().HasNoKey();
             modelBuilder.Entity<WordOut>().Property(x => x.weight).HasColumnName("weight");
             modelBuilder.Entity<WordOut>().Property(x => x.word).HasColumnName("word");
+
+            modelBuilder.Entity<CoPlayersOut>().HasNoKey();
+            modelBuilder.Entity<CoPlayersOut>().Property(x => x.nconst).HasColumnName("nconst");
+            modelBuilder.Entity<CoPlayersOut>().Property(x => x.name).HasColumnName("name");
+            modelBuilder.Entity<CoPlayersOut>().Property(x => x.frequency).HasColumnName("frequency");
         }
     }
 }

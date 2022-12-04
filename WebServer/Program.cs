@@ -11,6 +11,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSingleton<IMovieDataService, MovieDataService>();
 
+builder.Services.AddSingleton<IUserDataService, UserDataService>();
+
 builder.Services.AddSingleton<Hashing>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

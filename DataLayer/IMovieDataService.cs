@@ -15,7 +15,7 @@ namespace DataLayer
         //todo tjek om dette skal med i pogrammet
         /*public exact_match(string input)
         public exact_match(string userid string input)*/
-        List<MovieActorOut> find_coplayers(string nconst);
+        List<CoPlayersOut> find_coplayers(string nconst);
         List<MovieActorOut> movie_actors_by_rating(string tconst);
         List<MovieActorOut> similar_movies(string tconst);
         List<WordOut> word_word_match(List<string> input);

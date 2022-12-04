@@ -181,9 +181,9 @@ namespace DataLayer
 
         }*/
 
-        public List<MovieActorOut> find_coplayers(string nconst)
+        public List<CoPlayersOut> find_coplayers(string nconst)
         {
-            var result = db.movieactorout.FromSqlInterpolated($"select * find_coplayers({nconst})");
+            var result = db.coPlayersOuts.FromSqlInterpolated($"select * from find_coplayers({nconst})");
             return result.ToList();
         }
 
