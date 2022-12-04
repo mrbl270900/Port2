@@ -224,14 +224,5 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
-
-        private userModel CreateUserModel(user user)
-        {
-            var model = _mapper.Map<userModel>(user);
-            model.Url = _generator.GetUriByName(HttpContext, nameof(GetUser), new { user.userid });
-            return model;
-        }
-
-
     }
 }

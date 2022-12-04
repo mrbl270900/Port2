@@ -11,28 +11,67 @@ namespace DataLayer
 
         public movie_title? GetMovieTitle(string id)
         {
-            movie_title? movie = db.movie_titles.Find(id);
+            movie_title? movie = db.movie_titles
+                .Include(x => x.movie_Clicks)
+                .Include(x => x.movie_Akas)
+                .Include(x => x.movie_Episode)
+                .Include(x => x.movie_parents)
+                .Include(x => x.movie_Partofs)
+                .Include(x => x.movie_Ratings)
+                .Include(x => x.wis)
+                .Include(x => x.OMDB_Datasets)
+                .Include(x => x.title_search)
+                .Include(x => x.users_bookmark_title)
+                .FirstOrDefault(x => x.tconst == id);
             return movie;
         }
 
         public List<person> GetPersonList()
         {
-            return db.persons.ToList();
+            return db.persons
+                .Include(x => x.user_bookmarks)
+                .Include(x => x.partof)
+                .ToList();
         }
 
         public List<person> GetPersonList(int page = 0, int pagesize = 25)
         {
-            return db.persons.Skip(page*pagesize).Take(pagesize).ToList();
+            return db.persons
+                .Include(x => x.user_bookmarks)
+                .Include(x => x.partof)
+                .Skip(page*pagesize).Take(pagesize).ToList();
         }
 
         public List<movie_title> GetMovieTitleList()
         {
-            return db.movie_titles.ToList();
+            return db.movie_titles
+                .Include(x => x.movie_Clicks)
+                .Include(x => x.movie_Akas)
+                .Include(x => x.movie_Episode)
+                .Include(x => x.movie_parents)
+                .Include(x => x.movie_Partofs)
+                .Include(x => x.movie_Ratings)
+                .Include(x => x.wis)
+                .Include(x => x.OMDB_Datasets)
+                .Include(x => x.title_search)
+                .Include(x => x.users_bookmark_title)
+                .ToList();
         }
 
         public List<movie_title> GetMovieTitleList(int page = 0, int pagesize = 25)
         {
-            return db.movie_titles.Skip(page * pagesize).Take(pagesize).ToList();
+            return db.movie_titles
+                .Include(x => x.movie_Clicks)
+                .Include(x => x.movie_Akas)
+                .Include(x => x.movie_Episode)
+                .Include(x => x.movie_parents)
+                .Include(x => x.movie_Partofs)
+                .Include(x => x.movie_Ratings)
+                .Include(x => x.wis)
+                .Include(x => x.OMDB_Datasets)
+                .Include(x => x.title_search)
+                .Include(x => x.users_bookmark_title)
+                .Skip(page * pagesize).Take(pagesize).ToList();
         }
 
         public movie_title? SetMovie(movie_title input)
@@ -126,7 +165,9 @@ namespace DataLayer
 
         public person? GetPerson(string id)
         {
-            person? person = db.persons.FirstOrDefault(x => x.nconst == id);
+            person? person = db.persons
+                .Include(x => x.user_bookmarks)
+                .Include(x => x.partof).FirstOrDefault(x => x.nconst == id);
             return person;
         }
 
