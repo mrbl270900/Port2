@@ -2,6 +2,7 @@ using AutoMapper;
 using DataLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebServer.Models;
 
 namespace WebServer.Controllers
 
@@ -27,10 +28,11 @@ namespace WebServer.Controllers
         [Route("{page}/{pagesize}")]
         public IActionResult GetPersons([FromRoute] int page = 0, [FromRoute] int pagesize = 25)
         {
-            var data = _moviedataservice.GetPersonList();
+            var data = _moviedataservice.GetPersonList(page, pagesize);
             if (data != null)
             {
-                return Ok(data);
+                var _mappedPerson = _mapper.Map<PersonMap>(data);
+                return Ok(_mappedPerson);
             }
             return NotFound();
         }
