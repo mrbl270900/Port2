@@ -31,7 +31,7 @@ namespace WebServiceSimple.Controllers
         [Route("{page}/{pagesize}")]
         public IActionResult GetMovies([FromRoute] int page = 0, [FromRoute] int pagesize = 25)
         {
-            var data = _moviedataService.GetMovieTitleList(page, pagesize);
+            var data = _moviedataService.GetMovieTitleList(page, pagesize).Select(x => CreateMovieModel(x));
             if (data != null)
             {
                 return Ok(data);
@@ -53,7 +53,7 @@ namespace WebServiceSimple.Controllers
            
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("bestmatch")]
         public IActionResult best_match_search(List<string> input)
         {

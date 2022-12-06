@@ -20,7 +20,7 @@
 
         public string? genres { get; set; }
 
-        public List<movie_akas> movie_Akas  { get; set; }
+        public virtual List<movie_akas> movie_Akas  { get; set; }
 
         public List<movie_clicks> movie_Clicks { get; set; }
 
@@ -28,9 +28,9 @@
 
         public List<movie_episode> movie_parents { get; set; }
 
-        public List<movie_partof> movie_Partofs { get; set; }
+        public virtual List<movie_partof> movie_Partofs { get; set; }
 
-        public List<movie_rating> movie_Ratings { get; set;}
+        public List<movie_rating> movie_Ratings { get; } = new();
 
         public List<OMDB_dataset> OMDB_Datasets { get; set; }
 

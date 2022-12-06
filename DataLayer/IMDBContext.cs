@@ -98,6 +98,7 @@ namespace DataLayer
             modelBuilder.Entity<movie_rating>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<movie_rating>().Property(x => x.averagerating).HasColumnName("averagerating");
             modelBuilder.Entity<movie_rating>().Property(x => x.numvotes).HasColumnName("numvotes");
+            modelBuilder.Entity<movie_rating>().Property(x => x.movie_titleId).HasColumnName("tconst");
 
             modelBuilder.Entity<movie_clicks>().ToTable("movie_clicks");
             modelBuilder.Entity<movie_clicks>().HasKey(x => new { x.tconst });
