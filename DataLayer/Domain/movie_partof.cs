@@ -9,5 +9,9 @@
         public string? job { get; set; }
         public string? characters { get; set; }
 
+        public virtual movie_title Movie_Title { get; set; }
+
+        public virtual person Person { get; set; }
+
     }
 }

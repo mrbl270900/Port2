@@ -6,6 +6,8 @@
 
         public string tconst { get; set; }
 
-        public movie_title titles { get; set; }
+        public virtual movie_title titles { get; set; }
+
+        public virtual user User { get; set; }
     }
 }

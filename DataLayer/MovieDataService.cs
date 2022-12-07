@@ -2,6 +2,7 @@
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DataLayer
 {
@@ -13,16 +14,16 @@ namespace DataLayer
         {
             movie_title? movie = db.movie_titles
                 .Include(x => x.movie_Ratings)
-                /*.Include(x => x.movie_Clicks)
+                .Include(x => x.OMDB_Datasets)
+                .Include(x => x.movie_Partofs)
                 .Include(x => x.movie_Akas)
+                .Include(x => x.movie_Clicks)
                 .Include(x => x.movie_Episode)
                 .Include(x => x.movie_parents)
-                .Include(x => x.movie_Partofs)
-                .Include(x => x.movie_Ratings)
                 .Include(x => x.wis)
-                .Include(x => x.OMDB_Datasets)
+                .Include(x => x.users_bookmark_title)
+                .Include(x => x.user_Ratings)
                 .Include(x => x.title_search)
-                .Include(x => x.users_bookmark_title)*/
                 .FirstOrDefault(x => x.tconst == id);
             return movie;
         }
@@ -196,6 +197,9 @@ namespace DataLayer
         public List<BestMatchOut> best_match(List<string> input)
         {
             string ConcatInput = "SELECT * from best_match('";
+            if (input.Count < 1) {
+                ConcatInput = ConcatInput + "')";
+            }
             foreach (string element in input)
             {
                 if (input.Last().Equals(element))

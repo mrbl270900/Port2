@@ -6,6 +6,8 @@
 
         public string nconst { get; set; }
 
-        public person persons { get; set; }
+        public virtual person persons { get; set; }
+
+        public virtual user user { get; set; }
     }
 }

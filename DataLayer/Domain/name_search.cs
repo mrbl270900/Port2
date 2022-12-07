@@ -8,9 +8,9 @@
 
         public DateTime ts_timestamp { get; set; }
 
-        public user users { get; set; }
+        public virtual user users { get; set; }
 
-        public person persons { get; set; }
+        public virtual person persons { get; set; }
 
     }
 }

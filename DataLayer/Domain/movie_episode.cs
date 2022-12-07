@@ -9,8 +9,8 @@
 
         public int episodenumber { get; set; }
 
-        public movie_title titles { get; set; }
-        public movie_title parenttitles { get; set; }
+        public virtual movie_title titles { get; set; }
+        public virtual movie_title parenttitles { get; set; }
 
     }
 }

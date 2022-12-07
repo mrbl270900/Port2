@@ -55,15 +55,16 @@ namespace WebServiceSimple.Controllers
 
         [HttpPost]
         [Route("bestmatch")]
-        public IActionResult best_match_search(List<string> input)
+        public IActionResult best_match_search([FromQuery] string input)
         {
 
             if (input == null && !input.Any())
             {
                 return BadRequest();
             }
+            List<string> list = input.Split(',').ToList();
 
-            var bestmatch = _moviedataService.best_match(input);
+            var bestmatch = _moviedataService.best_match(list);
             return Ok(bestmatch);
 
         }

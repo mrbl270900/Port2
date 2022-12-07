@@ -14,9 +14,11 @@
 
         public float? name_rating { get; set; }
 
-        public List<movie_partof> partof { get; set; }
+        public virtual List<movie_partof> partof { get; set; }
 
-        public List<user_bookmark_name> user_bookmarks { get; set; }
+        public virtual List<user_bookmark_name> user_bookmarks { get; set; }
+
+        public virtual List<name_search> Name_Searches { get; set; }
 
     }
 }

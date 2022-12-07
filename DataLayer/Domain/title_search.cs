@@ -8,8 +8,8 @@
 
         public DateTime ts_timestamp { get; set; }
 
-        public user users { get; set; }
+        public virtual user users { get; set; }
 
-        public movie_title titles { get; set;}
+        public virtual movie_title titles { get; set;}
     }
 }

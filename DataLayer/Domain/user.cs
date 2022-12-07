@@ -10,15 +10,15 @@
 
         public bool admin { get; set; } = false;
 
-        public List<user_rating> user_Ratings { get; set; }
+        public virtual List<user_rating> user_Ratings { get; set; }
 
-        public List<user_bookmark_title> users_bookmark_titles { get;set; }
+        public virtual List<user_bookmark_title> users_bookmark_titles { get;set; }
 
-        public List<user_bookmark_name> users_bookmark_names { get; set; }
+        public virtual List<user_bookmark_name> users_bookmark_names { get; set; }
 
-        public List<title_search> title_Searches { get; set; }
+        public virtual List<title_search> title_Searches { get; set; }
 
-        public List<search_history> search_historys { get; set; }
+        public virtual List<search_history> search_historys { get; set; }
 
     }
 }

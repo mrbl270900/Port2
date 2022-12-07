@@ -7,9 +7,7 @@
         public float averagerating { get; set; }
 
         public int numvotes { get; set; }
-        
-        public string movie_titleId { get; set; }
 
-        public movie_title movie_title { get; set; }
+        public virtual movie_title movie_title { get; set; }
     }
 }

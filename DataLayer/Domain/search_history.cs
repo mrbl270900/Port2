@@ -8,7 +8,7 @@
 
         public DateTime sh_timestamp { get; set; }
 
-        public user users { get; set; }
+        public virtual user users { get; set; }
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DataLayer.Domain;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DataLayer
 {
@@ -48,7 +49,21 @@ namespace DataLayer
             modelBuilder.Entity<movie_title>().Property(x => x.endyear).HasColumnName("endyear");
             modelBuilder.Entity<movie_title>().Property(x => x.runtimeminutes).HasColumnName("runtimeminutes");
             modelBuilder.Entity<movie_title>().Property(x => x.genres).HasColumnName("genres");
-            modelBuilder.Entity<movie_title>().HasOne(x => x.movie_Episode).WithOne(m => m.titles).HasForeignKey<movie_episode>(x => x.tconst);
+
+
+            modelBuilder.Entity<movie_episode>().HasOne(x => x.titles).WithOne(m => m.movie_Episode).HasForeignKey<movie_episode>(x => x.tconst);
+            modelBuilder.Entity<movie_clicks>().HasOne(x => x.titles).WithOne(m => m.movie_Clicks).HasForeignKey<movie_clicks>(x => x.tconst);
+            modelBuilder.Entity<OMDB_dataset>().HasOne(x => x.titles).WithOne(m => m.OMDB_Datasets).HasForeignKey<OMDB_dataset>(x => x.tconst);
+            modelBuilder.Entity<movie_rating>().HasOne(x => x.movie_title).WithOne(m => m.movie_Ratings).HasForeignKey<movie_rating>(m => m.tconst);
+            modelBuilder.Entity<movie_akas>().HasOne(x => x.movie_titles).WithMany(m => m.movie_Akas).HasForeignKey(m => m.titleid);
+            modelBuilder.Entity<movie_partof>().HasOne(x => x.Movie_Title).WithMany(m => m.movie_Partofs).HasForeignKey(m => m.tconst);
+            modelBuilder.Entity<title_search>().HasOne(x => x.titles).WithMany(m => m.title_search).HasForeignKey(m => m.tconst);
+            modelBuilder.Entity<user_bookmark_title>().HasOne(x => x.titles).WithMany(m => m.users_bookmark_title).HasForeignKey(m => m.tconst);
+            modelBuilder.Entity<user_rating>().HasOne(x => x.titles).WithMany(m => m.user_Ratings).HasForeignKey(m => m.tconst);
+            modelBuilder.Entity<wi>().HasOne(x => x.titles).WithMany(m => m.wis).HasForeignKey(m => m.tconst);
+
+
+
 
             modelBuilder.Entity<person>().ToTable("person");
             modelBuilder.Entity<person>().HasKey(x => new { x.nconst });
@@ -58,6 +73,11 @@ namespace DataLayer
             modelBuilder.Entity<person>().Property(x => x.deathyear).HasColumnName("deathyear");
             modelBuilder.Entity<person>().Property(x => x.primaryprofession).HasColumnName("primaryprofession");
             modelBuilder.Entity<person>().Property(x => x.name_rating).HasColumnName("name_rating");
+
+            modelBuilder.Entity<movie_partof>().HasOne(x => x.Person).WithMany(m => m.partof).HasForeignKey(m => m.nconst);
+            modelBuilder.Entity<name_search>().HasOne(x => x.persons).WithMany(m => m.Name_Searches).HasForeignKey(m => m.nconst);
+            modelBuilder.Entity<user_bookmark_name>().HasOne(x => x.persons).WithMany(m => m.user_bookmarks).HasForeignKey(m => m.nconst);
+
 
             modelBuilder.Entity<user>().ToTable("users");
             modelBuilder.Entity<user>().HasKey(x => new { x.userid });
@@ -80,7 +100,7 @@ namespace DataLayer
             modelBuilder.Entity<movie_episode>().HasKey(x => new { x.tconst});
             modelBuilder.Entity<movie_episode>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<movie_episode>().Property(x => x.parenttconst).HasColumnName("parenttconst");
-            modelBuilder.Entity<movie_episode>().Property(x => x.seseasonnumber).HasColumnName("seseasonnumber");
+            modelBuilder.Entity<movie_episode>().Property(x => x.seseasonnumber).HasColumnName("seasonnumber");
             modelBuilder.Entity<movie_episode>().Property(x => x.episodenumber).HasColumnName("episodenumber");
             modelBuilder.Entity<movie_episode>().HasOne(x => x.parenttitles).WithMany(m => m.movie_parents).HasForeignKey(x => x.parenttconst);
 
@@ -98,7 +118,6 @@ namespace DataLayer
             modelBuilder.Entity<movie_rating>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<movie_rating>().Property(x => x.averagerating).HasColumnName("averagerating");
             modelBuilder.Entity<movie_rating>().Property(x => x.numvotes).HasColumnName("numvotes");
-            modelBuilder.Entity<movie_rating>().Property(x => x.movie_titleId).HasColumnName("tconst");
 
             modelBuilder.Entity<movie_clicks>().ToTable("movie_clicks");
             modelBuilder.Entity<movie_clicks>().HasKey(x => new { x.tconst });
@@ -111,7 +130,7 @@ namespace DataLayer
             modelBuilder.Entity<name_search>().Property(x => x.nconst).HasColumnName("nconst");
             modelBuilder.Entity<name_search>().Property(x => x.ts_timestamp).HasColumnName("ts_timestamp");
 
-            modelBuilder.Entity<OMDB_dataset>().ToTable("OMDB_dataset");
+            modelBuilder.Entity<OMDB_dataset>().ToTable("omdb_dataset");
             modelBuilder.Entity<OMDB_dataset>().HasKey(x => new { x.tconst});
             modelBuilder.Entity<OMDB_dataset>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<OMDB_dataset>().Property(x => x.poster).HasColumnName("poster");
@@ -140,7 +159,7 @@ namespace DataLayer
             modelBuilder.Entity<user_rating>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<user_rating>().Property(x => x.rating).HasColumnName("rating");
 
-            modelBuilder.Entity<user_bookmark_title>().ToTable("users_bookmark_title");
+            modelBuilder.Entity<user_bookmark_title>().ToTable("user_bookmark_title");
             modelBuilder.Entity<user_bookmark_title>().HasKey(x => new { x.userid, x.tconst });
             modelBuilder.Entity<user_bookmark_title>().Property(x => x.userid).HasColumnName("userid");
             modelBuilder.Entity<user_bookmark_title>().Property(x => x.tconst).HasColumnName("tconst");

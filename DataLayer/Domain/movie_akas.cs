@@ -11,7 +11,7 @@
         public string? attributes { get; set; }
         public bool isoriginaltitle { get; set; }
 
-        public movie_title movie_titles { get; set; }
+        public virtual movie_title movie_titles { get; set; }
 
     }
 }
