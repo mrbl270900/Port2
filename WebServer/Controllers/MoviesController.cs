@@ -47,24 +47,28 @@ namespace WebServiceSimple.Controllers
                 return BadRequest();
             }
             
-            var movies = _moviedataService.GetMovieTitle(id);
+            var data = _moviedataService.GetMovieTitle(id);
+            if(data != null)
+            {
+                var model = CreateMovieModel(data);
+                return Ok(model);
+            }
             
-            return Ok(movies);
+            return BadRequest();
            
         }
 
         [HttpPost]
         [Route("bestmatch")]
-        public IActionResult best_match_search([FromQuery] string input)
+        public IActionResult best_match_search(List<string> input)
         {
 
             if (input == null && !input.Any())
             {
                 return BadRequest();
             }
-            List<string> list = input.Split(',').ToList();
 
-            var bestmatch = _moviedataService.best_match(list);
+            var bestmatch = _moviedataService.best_match(input);
             return Ok(bestmatch);
 
         }

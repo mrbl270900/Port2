@@ -4,9 +4,9 @@
     {
         public string tconst { get; set; }
 
-        public string title { get; set; }
+        public string? title { get; set; }
 
-        public string primarytitle { get; set; }
+        public string? primarytitle { get; set; }
 
         public string? originaltitle { get; set; }
 

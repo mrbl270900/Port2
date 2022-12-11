@@ -30,9 +30,9 @@ namespace WebServiceToken.Controllers
 
         }
         [HttpPost("register")]
-        [Route("register")]
         public IActionResult Register(UserCreateModel model)
         {
+
             if (_userdataService.GetUser(model.Username) != null)
             {
                 return BadRequest();
@@ -51,7 +51,6 @@ namespace WebServiceToken.Controllers
 
         }
         [HttpPost("login")]
-        [Route("login")]
         public IActionResult Login(UserLoginModel model)
         {
             var user = _userdataService.GetUser(model.Username);
@@ -87,6 +86,20 @@ namespace WebServiceToken.Controllers
 
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult get_user(string userid)
+        {
+            if (string.IsNullOrEmpty(userid))
+            {
+                return BadRequest();
+            }
+            var data = _userdataService.GetUser(userid);
+
+
+            return Ok(data);
+
+        }
 
         [HttpPost]
         [Authorize]
