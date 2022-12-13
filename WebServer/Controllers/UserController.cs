@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 using WebServer.Models;
@@ -86,9 +87,10 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        public IActionResult get_user(string userid)
+        [Route("{userid}")]
+        public IActionResult get_user([FromRoute]string userid)
         {
             if (string.IsNullOrEmpty(userid))
             {
@@ -110,8 +112,16 @@ namespace WebServiceToken.Controllers
                 return BadRequest();
 
             }
+            try
+            {
+                _userdataService.create_title_bookmark(userid, tconst);
+            }
+            catch
+            {
+                return BadRequest();
 
-          
+            }
+
             return Ok();
 
         }
@@ -123,9 +133,16 @@ namespace WebServiceToken.Controllers
             if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(nconst))
             {
                 return BadRequest();
+            }
+            try
+            {
+                _userdataService.create_name_bookmark(userid, nconst);
+            }
+            catch
+            {
+                return BadRequest();
 
             }
-
 
             return Ok();
 
@@ -137,9 +154,85 @@ namespace WebServiceToken.Controllers
             if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst) && rating == null)
             {
                 return BadRequest();
+            }
+            try
+            {
+                _userdataService.create_rating(userid, tconst, rating);
+            }
+            catch
+            {
+                return BadRequest();
 
             }
 
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult create_title_search(string userid, string tconst)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst))
+            {
+                return BadRequest();
+
+            }
+            try
+            {
+                _userdataService.search_title(userid, tconst);
+            }
+            catch
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult create_person_search(string userid, string nconst)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(nconst))
+            {
+                return BadRequest();
+
+            }
+            try
+            {
+                _userdataService.search_name(userid, nconst);
+            }
+            catch
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult create_search_word(string userid, string input)
+        {
+            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(input))
+            {
+                return BadRequest();
+
+            }
+            try
+            {
+                _userdataService.search_word(userid, input);
+            }
+            catch
+            {
+                return BadRequest();
+
+            }
 
             return Ok();
 
@@ -192,6 +285,7 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
+
         [HttpDelete]
         [Authorize]
         public IActionResult delete_title_bookmark(string userid, string tconst)
@@ -214,6 +308,76 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
+
+        [HttpDelete]
+        [Authorize]
+        public IActionResult delete_title_search(string userid)
+        {
+            if (string.IsNullOrEmpty(userid))
+            {
+                return BadRequest();
+
+            }
+            try
+            {
+                _userdataService.delete_search_title(userid);
+            }
+            catch
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public IActionResult delete_name_search(string userid)
+        {
+            if (string.IsNullOrEmpty(userid))
+            {
+                return BadRequest();
+
+            }
+            try
+            {
+                _userdataService.delete_search_name(userid);
+            }
+            catch
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public IActionResult delete_search(string userid)
+        {
+            if (string.IsNullOrEmpty(userid))
+            {
+                return BadRequest();
+
+            }
+            try
+            {
+                _userdataService.delete_search(userid);
+            }
+            catch
+            {
+                return BadRequest();
+
+            }
+
+            return Ok();
+
+        }
+
         [HttpDelete]
         [Authorize]
         public IActionResult delete_user(string userid)

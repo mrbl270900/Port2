@@ -68,8 +68,12 @@ namespace WebServiceSimple.Controllers
                 return BadRequest();
             }
 
-            var bestmatch = _moviedataService.best_match(input);
-            return Ok(bestmatch);
+            var data = _moviedataService.best_match(input);
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            return NotFound();
 
         }
 
@@ -81,6 +85,8 @@ namespace WebServiceSimple.Controllers
             {
                 return BadRequest();
             }
+
+            _moviedataService.movie_visited(tconst);
 
             return Ok();
 
@@ -96,7 +102,12 @@ namespace WebServiceSimple.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            var data = _moviedataService.similar_movies(tconst);
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            return NotFound();
         }
 
         private string? CreateLink(int page, int pageSize)
@@ -106,44 +117,6 @@ namespace WebServiceSimple.Controllers
                 nameof(GetMovies), new { page, pageSize });
         }
 
-        private object Paging<T>(int page, int pageSize, int total, IEnumerable<T> items)
-        {
-            pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
-
-            //if (pageSize > MaxPageSize)
-            //{
-            //    pageSize = MaxPageSize;
-            //}
-
-            var pages = (int)Math.Ceiling((double)total / (double)pageSize)
-                ;
-
-            var first = total > 0
-                ? CreateLink(0, pageSize)
-                : null;
-
-            var prev = page > 0
-                ? CreateLink(page - 1, pageSize)
-                : null;
-
-            var current = CreateLink(page, pageSize);
-
-            var next = page < pages - 1
-                ? CreateLink(page + 1, pageSize)
-                : null;
-
-            var result = new
-            {
-                first,
-                prev,
-                next,
-                current,
-                total,
-                pages,
-                items
-            };
-            return result;
-        }
 
         private movieModel CreateMovieModel(movie_title movie)
         {

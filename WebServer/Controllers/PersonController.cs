@@ -64,8 +64,12 @@ namespace WebServer.Controllers
             }
             
                 var data = _moviedataservice.find_coplayers(name);
+            if (data != null)
+            {
                 return Ok(data);
-            
+            }
+                return NotFound();
+
         }
         [HttpGet]
         [Route("{tconst}/movieactorsbyrating")]
@@ -106,44 +110,6 @@ namespace WebServer.Controllers
                 nameof(GetPerson), new { page, pageSize });
         }
        
-        private object Paging<T>(int page, int pageSize, int total, IEnumerable<T> items)
-        {
-                pageSize = pageSize > MaxPageSize ? MaxPageSize : pageSize;
-
-                //if (pageSize > MaxPageSize)
-                //{
-                //    pageSize = MaxPageSize;
-                //}
-
-                var pages = (int)Math.Ceiling((double)total / (double)pageSize)
-                    ;
-
-                var first = total > 0
-                    ? CreateLink(0, pageSize)
-                    : null;
-
-                var prev = page > 0
-                    ? CreateLink(page - 1, pageSize)
-                    : null;
-
-                var current = CreateLink(page, pageSize);
-
-                var next = page < pages - 1
-                    ? CreateLink(page + 1, pageSize)
-                    : null;
-
-                var result = new
-                {
-                    first,
-                    prev,
-                    next,
-                    current,
-                    total,
-                    pages,
-                    items
-                };
-                return result;
-        }
         private personModel CreatePersonModel(person person)
         {
             var model = _mapper.Map<personModel>(person);

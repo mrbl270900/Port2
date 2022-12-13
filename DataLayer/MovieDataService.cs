@@ -36,6 +36,19 @@ namespace DataLayer
 
         public List<person> GetPersonList(int page = 0, int pagesize = 25)
         {
+            if (pagesize > 100)
+            {
+                pagesize = 100;
+            } else if (pagesize<1)
+            {
+                pagesize = 1;
+            }
+            if(page < 0)
+            {
+                page = 0;
+            }
+
+
             return db.persons
                 .Skip(page*pagesize).Take(pagesize).ToList();
         }
@@ -48,6 +61,19 @@ namespace DataLayer
 
         public List<movie_title> GetMovieTitleList(int page = 0, int pagesize = 25)
         {
+            if (pagesize > 100)
+            {
+                pagesize = 100;
+            }
+            else if (pagesize < 1)
+            {
+                pagesize = 1;
+            }
+            if (page < 0)
+            {
+                page = 0;
+            }
+
             return db.movie_titles
                 .Skip(page * pagesize).Take(pagesize).ToList();
         }
@@ -144,8 +170,8 @@ namespace DataLayer
         public person? GetPerson(string id)
         {
             person? person = db.persons
-                /*.Include(x => x.user_bookmarks)
-                .Include(x => x.partof)*/
+                .Include(x => x.user_bookmarks)
+                .Include(x => x.partof)
                 .FirstOrDefault(x => x.nconst == id);
             return person;
         }
