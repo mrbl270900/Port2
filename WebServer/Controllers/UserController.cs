@@ -27,6 +27,7 @@ namespace WebServiceToken.Controllers
         {
             _userdataService = userdataService;
             _hashing = hashing;
+            _configuration = configuration;
 
 
         }
