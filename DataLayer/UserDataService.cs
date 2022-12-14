@@ -1,6 +1,7 @@
 ﻿using DataLayer.Domain;
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace DataLayer
 {
@@ -10,7 +11,13 @@ namespace DataLayer
 
         public user? GetUser(string id)
         {
-            user? user = db.users.Find(id);
+            user? user = db.users
+                .Include(x => x.title_Searches)
+                .Include(x => x.user_Ratings)
+                .Include(x => x.users_bookmark_titles)
+                .Include(x => x.search_historys)
+                .Include(x => x.users_bookmark_names)
+                .FirstOrDefault(x => x.userid == id);
             return user;
         }
         public void create_name_bookmark(string userid, string nconst)

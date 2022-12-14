@@ -39,22 +39,22 @@ namespace WebServiceSimple.Controllers
             return NotFound();
         }
 
-        [HttpGet ("{id}", Name = nameof(GetMovieTitle))]
-        public IActionResult GetMovieTitle([FromRoute] string id)
+        [HttpGet ("{tconst}", Name = nameof(GetMovie))]
+        public IActionResult GetMovie([FromRoute] string tconst)
         {
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(tconst))
             {
                 return BadRequest();
             }
             
-            var data = _moviedataService.GetMovieTitle(id);
+            var data = _moviedataService.GetMovieTitle(tconst);
             if(data != null)
             {
                 var model = CreateMovieModel(data);
                 return Ok(model);
             }
             
-            return BadRequest();
+            return NotFound();
            
         }
 
@@ -121,7 +121,7 @@ namespace WebServiceSimple.Controllers
         private movieModel CreateMovieModel(movie_title movie)
         {
             var model = _mapper.Map<movieModel>(movie);
-            model.Url = _generator.GetUriByName(HttpContext, nameof(GetMovies), new { movie.tconst });
+            model.Url = _generator.GetUriByName(HttpContext, nameof(GetMovie), new { movie.tconst });
             return model;
         }
 
