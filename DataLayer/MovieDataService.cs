@@ -72,6 +72,7 @@ namespace DataLayer
             }
 
             return db.movie_titles
+                .Include(x => x.OMDB_Datasets)
                 .Skip(page * pagesize).Take(pagesize).ToList();
         }
 
