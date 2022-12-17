@@ -8,16 +8,6 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://example.com",
-                                              "http://localhost:3000");
-                      });
-});
-
 builder.Services.AddControllers();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -46,10 +36,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
+
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(
+
+    options => options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader()
+
+);
 
 app.MapControllers();
 
