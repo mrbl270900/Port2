@@ -195,6 +195,8 @@ namespace DataLayer
 
         public List<BestMatchOut> best_match(List<string> input)
         {
+
+            IMDBContext x = new IMDBContext();
             string ConcatInput = "SELECT * from best_match('";
             if (input.Count < 1) {
                 ConcatInput = ConcatInput + "')";
@@ -211,7 +213,7 @@ namespace DataLayer
                 ConcatInput = ConcatInput + "', '";
             }
             
-            var result = db.bestmatchouts.FromSqlRaw(ConcatInput);
+            var result = x.bestmatchouts.FromSqlRaw(ConcatInput);
             return result.ToList();
         }
 
