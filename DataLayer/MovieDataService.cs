@@ -15,11 +15,11 @@ namespace DataLayer
                 .Include(x => x.movie_Ratings)
                 .Include(x => x.OMDB_Datasets)
                 .Include(x => x.movie_Partofs)
-                .Include(x => x.movie_Akas)
+                //.Include(x => x.movie_Akas)
                 .Include(x => x.movie_Clicks)
-                .Include(x => x.movie_Episode)
-                .Include(x => x.movie_parents)
-                .Include(x => x.wis)
+                //.Include(x => x.movie_Episode)
+                //.Include(x => x.movie_parents)
+                //.Include(x => x.wis) // har valgt at fjerne disse inclueds da vi ikke anvender dem i frontend og de tager lang tid at få med 
                 .FirstOrDefault(x => x.tconst == id);
             return movie;
         }
@@ -48,6 +48,7 @@ namespace DataLayer
 
 
             return db.persons
+                .Include(x => x.partof)
                 .Skip(page*pagesize).Take(pagesize).ToList();
         }
 
@@ -272,10 +273,10 @@ namespace DataLayer
             db.SaveChanges();
         }
 
-        public List<MovieActorOut> similar_movies(string tconst)
+        public List<SimilarMoviesOut> similar_movies(string tconst)
         {
             IMDBContext db = new IMDBContext();
-            var result = db.movieactorout.FromSqlInterpolated($"select * similar_movies({tconst})");
+            var result = db.similarMoviesOut.FromSqlInterpolated($"select * from similar_movies({tconst})");
             return result.ToList();
         }
 

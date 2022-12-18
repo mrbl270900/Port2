@@ -17,7 +17,7 @@ namespace DataLayer
         public exact_match(string userid string input)*/
         List<CoPlayersOut> find_coplayers(string nconst);
         List<MovieActorOut> movie_actors_by_rating(string tconst);
-        List<MovieActorOut> similar_movies(string tconst);
+        List<SimilarMoviesOut> similar_movies(string tconst);
         List<WordOut> word_word_match(List<string> input);
         void movie_visited(string tconst);
         void name_rating_setter();

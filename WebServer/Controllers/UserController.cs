@@ -52,6 +52,7 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
+
         [HttpPost("login")]
         public IActionResult Login(UserLoginModel model)
         {
@@ -79,7 +80,7 @@ namespace WebServiceToken.Controllers
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(15),
+                expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: creds);
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
@@ -104,19 +105,18 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("create_title_bookmark")]
         [Authorize]
-        [Route("create_title_bookmark")]
-        public IActionResult create_title_bookmark(string userid, string tconst)
+        public IActionResult createtitlebookmark(titleBookmark model)
         {
-            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst))
+            if (string.IsNullOrEmpty(model.userid) && string.IsNullOrEmpty(model.tconst))
             {
                 return BadRequest();
 
             }
             try
             {
-                _userdataService.create_title_bookmark(userid, tconst);
+                _userdataService.create_title_bookmark(model.userid, model.tconst);
             }
             catch
             {
@@ -128,17 +128,17 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("create_name_bookmark")]
         [Authorize]
-        public IActionResult create_name_bookmark(string userid, string nconst)
+        public IActionResult create_name_bookmark(titleBookmark model)
         {
-            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(nconst))
+            if (string.IsNullOrEmpty(model.userid) && string.IsNullOrEmpty(model.tconst))
             {
                 return BadRequest();
             }
             try
             {
-                _userdataService.create_name_bookmark(userid, nconst);
+                _userdataService.create_name_bookmark(model.userid, model.tconst);
             }
             catch
             {
@@ -149,17 +149,17 @@ namespace WebServiceToken.Controllers
             return Ok();
 
         }
-        [HttpPost]
+        [HttpPost("create_rating")]
         [Authorize]
-        public IActionResult create_rating(string userid, string tconst, int rating)
+        public IActionResult create_rating(movieRating model)
         {
-            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst) && rating == null)
+            if (string.IsNullOrEmpty(model.userid) && string.IsNullOrEmpty(model.tconst) && model.rating == null)
             {
                 return BadRequest();
             }
             try
             {
-                _userdataService.create_rating(userid, tconst, rating);
+                _userdataService.create_rating(model.userid, model.tconst, model.rating);
             }
             catch
             {
@@ -171,18 +171,18 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("create_title_search")]
         [Authorize]
-        public IActionResult create_title_search(string userid, string tconst)
+        public IActionResult create_title_search(titleBookmark model)
         {
-            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(tconst))
+            if (string.IsNullOrEmpty(model.userid) && string.IsNullOrEmpty(model.tconst))
             {
                 return BadRequest();
 
             }
             try
             {
-                _userdataService.search_title(userid, tconst);
+                _userdataService.search_title(model.userid, model.tconst);
             }
             catch
             {
@@ -217,18 +217,18 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("create_search_word")]
         [Authorize]
-        public IActionResult create_search_word(string userid, string input)
-        {
-            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(input))
+        public IActionResult create_search_word(titleBookmark model)
+        {//ikke rigtige model men virker tconst er input i dette tilfælde
+            if (string.IsNullOrEmpty(model.userid) && string.IsNullOrEmpty(model.tconst))
             {
                 return BadRequest();
 
             }
             try
             {
-                _userdataService.search_word(userid, input);
+                _userdataService.search_word(model.userid, model.tconst);
             }
             catch
             {
