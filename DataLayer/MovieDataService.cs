@@ -8,10 +8,9 @@ namespace DataLayer
 {
     public class MovieDataService : IMovieDataService
     {
-        public IMDBContext db = new IMDBContext();
-
         public movie_title? GetMovieTitle(string id)
         {
+            IMDBContext db = new IMDBContext();
             movie_title? movie = db.movie_titles
                 .Include(x => x.movie_Ratings)
                 .Include(x => x.OMDB_Datasets)
@@ -27,12 +26,14 @@ namespace DataLayer
 
         public List<person> GetPersonList()
         {
+            IMDBContext db = new IMDBContext();
             return db.persons
                 .ToList();
         }
 
         public List<person> GetPersonList(int page = 0, int pagesize = 25)
         {
+            IMDBContext db = new IMDBContext();
             if (pagesize > 100)
             {
                 pagesize = 100;
@@ -52,12 +53,14 @@ namespace DataLayer
 
         public List<movie_title> GetMovieTitleList()
         {
+            IMDBContext db = new IMDBContext();
             return db.movie_titles
                 .ToList();
         }
 
         public List<movie_title> GetMovieTitleList(int page = 0, int pagesize = 25)
         {
+            IMDBContext db = new IMDBContext();
             if (pagesize > 100)
             {
                 pagesize = 100;
@@ -78,12 +81,14 @@ namespace DataLayer
 
         public movie_title? SetMovie(movie_title input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_titles.Add(input);
             db.SaveChanges();
             return input;
         }
         public movie_title? DeleteMovie(movie_title input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_titles.Remove(input);
             db.SaveChanges();
             return input;
@@ -91,12 +96,14 @@ namespace DataLayer
 
         public movie_partof? SetMovie_partof(movie_partof input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_partof.Add(input);
             db.SaveChanges();
             return input;
         }
         public movie_partof? DeleteMovie_partof(movie_partof input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_partof.Remove(input);
             db.SaveChanges();
             return input;
@@ -104,12 +111,14 @@ namespace DataLayer
 
         public movie_rating? SetMovie_rating(movie_rating input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_rating.Add(input);
             db.SaveChanges();
             return input;
         }
         public movie_rating? DeleteMovie_rating(movie_rating input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_rating.Remove(input);
             db.SaveChanges();
             return input;
@@ -117,42 +126,49 @@ namespace DataLayer
 
         public movie_akas? SetMovie_akas(movie_akas input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_akas.Add(input);
             db.SaveChanges();
             return input;
         }
         public OMDB_dataset? DeleteOMDB_dataset(OMDB_dataset input)
         {
+            IMDBContext db = new IMDBContext();
             db.omdb_dataset.Remove(input);
             db.SaveChanges();
             return input;
         }
         public wi? SetWi(wi input)
         {
+            IMDBContext db = new IMDBContext();
             db.wis.Add(input);
             db.SaveChanges();
             return input;
         }
         public wi? DeleteWi(wi input)
         {
+            IMDBContext db = new IMDBContext();
             db.wis.Remove(input);
             db.SaveChanges();
             return input;
         }
         public movie_episode? SetMovie_episode(movie_episode input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_episodes.Add(input);
             db.SaveChanges();
             return input;
         }
         public movie_episode? DeleteMovie_episode(movie_episode input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_episodes.Remove(input);
             db.SaveChanges();
             return input;
         }
         public OMDB_dataset? SetOMDB_dataset(OMDB_dataset input)
         {
+            IMDBContext db = new IMDBContext();
             db.omdb_dataset.Add(input);
             db.SaveChanges();
             return input;
@@ -160,6 +176,7 @@ namespace DataLayer
 
         public movie_akas? DeleteMovie_akas(movie_akas input)
         {
+            IMDBContext db = new IMDBContext();
             db.movie_akas.Remove(input);
             db.SaveChanges();
             return input;
@@ -167,6 +184,7 @@ namespace DataLayer
 
         public person? GetPerson(string id)
         {
+            IMDBContext db = new IMDBContext();
             person? person = db.persons
                 .Include(x => x.partof)
                 .FirstOrDefault(x => x.nconst == id);
@@ -175,6 +193,7 @@ namespace DataLayer
 
         public person? SetPerson(person input)
         {
+            IMDBContext db = new IMDBContext();
             db.persons.Add(input);
             db.SaveChanges();
             return input;
@@ -182,21 +201,17 @@ namespace DataLayer
 
         public person? DeletePerson(person input)
         {
+            IMDBContext db = new IMDBContext();
             db.persons.Remove(input);
             db.SaveChanges();
             return input;
         }
 
 
-        //todo mangler generele funktioner der kigge i vores tabeler
-
-
-
-
         public List<BestMatchOut> best_match(List<string> input)
         {
 
-            IMDBContext x = new IMDBContext();
+            IMDBContext db = new IMDBContext();
             string ConcatInput = "SELECT * from best_match('";
             if (input.Count < 1) {
                 ConcatInput = ConcatInput + "')";
@@ -213,7 +228,7 @@ namespace DataLayer
                 ConcatInput = ConcatInput + "', '";
             }
             
-            var result = x.bestmatchouts.FromSqlRaw(ConcatInput);
+            var result = db.bestmatchouts.FromSqlRaw(ConcatInput);
             return result.ToList();
         }
 
@@ -231,36 +246,42 @@ namespace DataLayer
 
         public List<CoPlayersOut> find_coplayers(string nconst)
         {
+            IMDBContext db = new IMDBContext();
             var result = db.coPlayersOuts.FromSqlInterpolated($"select * from find_coplayers({nconst})");
             return result.ToList();
         }
 
         public List<MovieActorOut> movie_actors_by_rating(string tconst)
         {
+            IMDBContext db = new IMDBContext();
             var result = db.movieactorout.FromSqlInterpolated($"select * from movie_actors_by_rating({tconst})");
             return result.ToList();
         }
 
         public void movie_visited(string tconst)
         {
+            IMDBContext db = new IMDBContext();
             db.Database.ExecuteSqlInterpolated($"select movie_visited({tconst})");
             db.SaveChanges();
         }
 
         public void name_rating_setter()
         {
+            IMDBContext db = new IMDBContext();
             db.Database.ExecuteSqlInterpolated($"select movie_visited()");
             db.SaveChanges();
         }
 
         public List<MovieActorOut> similar_movies(string tconst)
         {
+            IMDBContext db = new IMDBContext();
             var result = db.movieactorout.FromSqlInterpolated($"select * similar_movies({tconst})");
             return result.ToList();
         }
 
         public List<WordOut> word_word_match(List<string> input)
         {
+            IMDBContext db = new IMDBContext();
             string ConcatInput = "SELECT * from word_word_match('";
             foreach (string element in input)
             {
