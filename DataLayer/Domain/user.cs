@@ -20,5 +20,7 @@
 
         public virtual List<search_history> search_historys { get; set; }
 
+        public virtual List<name_search> person_historys { get; set; }
+
     }
 }

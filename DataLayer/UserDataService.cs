@@ -13,6 +13,7 @@ namespace DataLayer
             user? user = db.users
                 .Include(x => x.title_Searches)
                 .Include(x => x.user_Ratings)
+                .Include(x => x.person_historys)
                 .Include(x => x.users_bookmark_titles)
                 .Include(x => x.search_historys)
                 .Include(x => x.users_bookmark_names)

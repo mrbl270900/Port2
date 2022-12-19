@@ -194,18 +194,18 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("create_person_search")]
         [Authorize]
-        public IActionResult create_person_search(string userid, string nconst)
+        public IActionResult create_person_search(titleBookmark model)//using tconsts as movie obj
         {
-            if (string.IsNullOrEmpty(userid) && string.IsNullOrEmpty(nconst))
+            if (string.IsNullOrEmpty(model.userid) && string.IsNullOrEmpty(model.tconst))
             {
                 return BadRequest();
 
             }
             try
             {
-                _userdataService.search_name(userid, nconst);
+                _userdataService.search_name(model.userid, model.tconst);
             }
             catch
             {
@@ -380,11 +380,11 @@ namespace WebServiceToken.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpPost("delete_user")]
         [Authorize]
-        public IActionResult delete_user(string userid)
+        public IActionResult delete_user(titleBookmark model) // a layze reuse
         {
-            if (string.IsNullOrEmpty(userid))
+            if (string.IsNullOrEmpty(model.userid))
             {
                 return BadRequest();
 
@@ -392,7 +392,7 @@ namespace WebServiceToken.Controllers
 
             try
             {
-                _userdataService.delete_user(userid);
+                _userdataService.delete_user(model.userid);
             }
             catch 
             { 
