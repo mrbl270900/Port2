@@ -22,5 +22,7 @@ namespace DataLayer
         void movie_visited(string tconst);
         void name_rating_setter();
         person? GetPerson(string id);
+
+        List<WordOut> person_words(string name);
     }
 }

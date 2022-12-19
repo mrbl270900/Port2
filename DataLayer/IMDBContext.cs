@@ -30,6 +30,8 @@ namespace DataLayer
         public DbSet<CoPlayersOut> coPlayersOuts { get; set; }
         public DbSet<SimilarMoviesOut> similarMoviesOut { get; set; }
 
+        public DbSet<NameWordOut> nameWordOuts { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -197,6 +199,9 @@ namespace DataLayer
             modelBuilder.Entity<SimilarMoviesOut>().Property(x => x.tconst).HasColumnName("nconst");
             modelBuilder.Entity<SimilarMoviesOut>().Property(x => x.primarytitle).HasColumnName("primaryname");
             modelBuilder.Entity<SimilarMoviesOut>().Property(x => x.movie_rating).HasColumnName("movie_rating");
+
+            modelBuilder.Entity<NameWordOut>().HasNoKey();
+            modelBuilder.Entity<NameWordOut>().Property(x => x.word).HasColumnName("word");
         }
     }
 }

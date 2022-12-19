@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Models
 {
-    public class WordOut
+    public class NameWordOut
     {
         public string word { get; set; }
-        public int weight { get; set; }
     }
 }

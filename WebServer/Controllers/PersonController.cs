@@ -89,6 +89,24 @@ namespace WebServer.Controllers
 
         }
 
+        [HttpGet]
+        [Route("{name}/person_words")]
+        public IActionResult person_words([FromRoute] string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return BadRequest();
+            }
+
+            var data = _moviedataservice.person_words(name);
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            return NotFound();
+
+        }
+
 
         [HttpGet]
         [Route("nameratingsetter")]

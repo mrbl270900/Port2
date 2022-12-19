@@ -2,6 +2,7 @@
 using DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace DataLayer
@@ -297,6 +298,13 @@ namespace DataLayer
             }
 
             var result = db.wordout.FromSqlRaw(ConcatInput);
+            return result.ToList();
+        }
+
+        public List<WordOut> person_words(string name)
+        {
+            IMDBContext db = new IMDBContext();
+            var result = db.wordout.FromSqlInterpolated($"select * from person_wordsV2({name})");
             return result.ToList();
         }
     }
