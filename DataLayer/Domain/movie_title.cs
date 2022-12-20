@@ -1,4 +1,6 @@
-﻿namespace DataLayer.Domain
+﻿using DataLayer.Models;
+
+namespace DataLayer.Domain
 {
     public class movie_title
     {
@@ -20,7 +22,7 @@
 
         public string? genres { get; set; }
 
-        public virtual List<movie_akas>? movie_Akas  { get; set; }
+        public virtual List<movie_akas>? movie_Akas { get; set; }
 
         public virtual movie_clicks? movie_Clicks { get; set; }
 
